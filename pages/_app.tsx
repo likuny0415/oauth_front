@@ -11,9 +11,7 @@ Router.events.on("routeChangeStart", nProgress.start);
 Router.events.on("routeChangeError", nProgress.done);
 Router.events.on("routeChangeComplete", nProgress.done);
 
-Router.events.on('routeChangeStart', () => {
-  console.log("123123")
-});
+
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
