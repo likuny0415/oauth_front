@@ -17,7 +17,7 @@ export const TodoList: React.FC<Props> = ({todos, toggleTodo, deleteTodo, editTo
     return (
         <ul>
             {todos.map((todo) => (
-                <div key={todo.text} className='flex'>
+                <div key={todo.id}>
                 <TodoListItem key={todo.id} deleteTodo={deleteTodo} todo={todo} toggleTodo={toggleTodo} editTodo={editTodo} />
                 
                 </div>

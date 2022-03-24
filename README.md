@@ -61,3 +61,20 @@ Content-Type: text/html
     - It has a status information(401: unanthorized)
     - A body contains the fetch information
 
+##### Task3. Layouts in css
+**Flex box**:
+1. Without flex display, all the elements will layout in a row
+2. Flexbox is designed for **one** dimensional layout
+
+**Grid**
+1. Grid is for **two** dimensional layout
+
+**Inline & Inline-block & block**
+- Block will take all the space
+- Inline-block, It will take wider space in a line
+- It will take space in a line
+
+**Relative & Absolute**
+1. If current element' parent do not have a relative, it will go to the body
+2. If Absolute's parent have a ``relative``, it will position itself in it's parent
+
