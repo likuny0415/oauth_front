@@ -10,7 +10,7 @@ export const AddTodoForm: React.FC<Props> = ({addTodo}: Props) => {
 
     return (
         <form>
-            <input type='text' value={text} className="border-2" onChange={(e) => {
+            <input type='text' value={text} className="input input-bordered w-full max-w-xs" onChange={(e) => {
                 setText(e.target.value)
             }} />
             <button type="submit" onClick={(e) => {

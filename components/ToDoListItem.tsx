@@ -88,11 +88,15 @@ const TodoListItem: React.FC<Props> = ({
 
   const editingTemplate = (
     <form className="flex flex-col md:flex-row mt-3" onSubmit={handleSubmit}>
-        
+
+        <div className="md:hidden flex justify-center items-center my-2 ">
+        <div className="badge badge-lg">Editing</div>
+        </div>
+
       <div className="md:flex-1">
         <input
           type="text"
-          className="input input-bordered input-secondary w-full max-w-x input-sm md:input-md"
+          className="input input-bordered input-secondary w-full max-w-x input-lg md:input-md"
           value={newText}
           onChange={(e) => setNewText(e.target.value)}
         />
@@ -102,7 +106,7 @@ const TodoListItem: React.FC<Props> = ({
       <div className="flex flex-col md:flex-row justify-between ">
         <div className="md:flex-1 flex my-2 md:my-0 justify-center ">
           <button
-            className="btn btn-outline btn-primary ml-2 flex-1 btn-sm md:btn-md"
+            className="btn btn-outline btn-primary md:ml-2 flex-1"
             type="button"
             onClick={() => setEditing(false)}
           >
@@ -127,7 +131,7 @@ const TodoListItem: React.FC<Props> = ({
         </div>
 
         <div className="md:flex-1 flex justify-center md:mr-2">
-          <button className="btn btn-outline btn-accent ml-2 flex-1 btn-sm md:btn-md" type="submit">
+          <button className="btn btn-outline btn-accent md:ml-2 flex-1" type="submit">
             <div className="flex justify-center items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -160,7 +164,7 @@ const TodoListItem: React.FC<Props> = ({
         <div className="flex justify-center items-center mt-3">
           <input
             type="checkbox"
-            className="md:checkbox-lg checkbox checkbox-primary"
+            className="checkbox-lg checkbox checkbox-primary"
             defaultChecked={todo.complete}
           />
           <span className="ml-4 font-bold">{todo.text}</span>
@@ -171,7 +175,7 @@ const TodoListItem: React.FC<Props> = ({
       <div className="md:flex justify-between md:my-2">
         <div className="flex-1 flex justify-center ">
           <button
-            className="btn btn-outline btn-sm flex-1"
+            className="btn btn-outline md:btn-sm flex-1"
             type="button"
             onClick={() => setEditing(true)}
           >
@@ -199,7 +203,7 @@ const TodoListItem: React.FC<Props> = ({
 
         <div className="flex-1 flex justify-center  mt-2 md:mt-0">
           <button
-            className="btn btn-outline btn-error btn-primary btn-sm flex-1"
+            className="btn btn-outline btn-error btn-primary md:btn-sm flex-1"
             type="button"
             onClick={() => deleteTodo(todo.id)}
           >
