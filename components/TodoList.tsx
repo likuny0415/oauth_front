@@ -15,7 +15,7 @@ import TodoListItem from "./ToDoListItem";
 export const TodoList: React.FC<Props> = ({todos, toggleTodo, deleteTodo, editTodo}: Props) => {
 
     return (
-        <ul>
+        <ul className="">
             {todos.map((todo) => (
                 <div key={todo.id}>
                 <TodoListItem key={todo.id} deleteTodo={deleteTodo} todo={todo} toggleTodo={toggleTodo} editTodo={editTodo} />

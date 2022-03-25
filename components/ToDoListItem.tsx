@@ -87,29 +87,71 @@ const TodoListItem: React.FC<Props> = ({
   );
 
   const editingTemplate = (
-    <form className="flex flex-row" onSubmit={handleSubmit}>
-      <div>
-        <label>Edit Current Todo</label>
+    <form className="flex mt-3" onSubmit={handleSubmit}>
+      <div className="flex-1">
         <input
           type="text"
-          className="border-2"
+          className="input input-bordered input-secondary w-full max-w-x input-md"
           value={newText}
           onChange={(e) => setNewText(e.target.value)}
         />
       </div>
 
-      <button className="ml-2" type="button" onClick={() => setEditing(false)}>
-        Cancel
-      </button>
-      <button className="ml-2" type="submit">
-        Save
-      </button>
+      <div className="flex justify-between">
+        <div className="flex-1 flex justify-center ">
+          <button
+            className="btn btn-outline btn-primary ml-2 flex-1"
+            type="button"
+            onClick={() => setEditing(false)}
+          >
+            <div className="flex justify-center items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+              <span className="flex-1 ml-4 inline-block">Cancel</span>
+            </div>
+          </button>
+        </div>
+
+        <div className="flex-1 flex justify-center mr-2">
+          <button className="btn btn-outline btn-accent ml-2 flex-1" type="submit">
+            <div className="flex justify-center items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"
+                />
+              </svg>
+              <span className="flex-1 ml-4 inline-block">Save</span>
+            </div>
+          </button>
+        </div>
+      </div>
     </form>
   );
   //border-2 border-yellow-500
 
   const viewTemplate = (
-    <div className="flex flex-col">
+    <div className="flex flex-col mt-3">
       <div className=" flex justify-between ">
         <label className="cursor-pointer label ">
           <input
@@ -123,7 +165,6 @@ const TodoListItem: React.FC<Props> = ({
       </div>
 
       <div className="flex justify-between">
-
         <div className="flex-1 flex justify-center ">
           <button
             className="btn btn-outline btn-sm flex-1"
