@@ -58,7 +58,7 @@ const TodoListItem: React.FC<Props> = ({
   }, [todo.ddl]);
 
   const timeLeft = (
-    <div className="flex font-mono ">
+    <div className="flex font-mono my-2 md:my-0 ">
       <CountDown timeUnit={day} unitType={"days"} />
       <CountDown timeUnit={hour} unitType={"hours"} />
       <CountDown timeUnit={minute} unitType={"min"} />
@@ -67,7 +67,7 @@ const TodoListItem: React.FC<Props> = ({
   );
 
   const outOfTime = (
-    <div className="flex items-center text-red-500">
+    <div className="flex items-center my-2 md:my-0 text-red-700">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="h-6 w-6"
@@ -82,25 +82,27 @@ const TodoListItem: React.FC<Props> = ({
           d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
         />
       </svg>
-      <h3 className="text-bold text-md mr-1">TimeOut!</h3>
+      <h3 className="text-bold text-sm md:text-md mr-1">TimeOut!</h3>
     </div>
   );
 
   const editingTemplate = (
-    <form className="flex mt-3" onSubmit={handleSubmit}>
-      <div className="flex-1">
+    <form className="flex flex-col md:flex-row mt-3" onSubmit={handleSubmit}>
+        
+      <div className="md:flex-1">
         <input
           type="text"
-          className="input input-bordered input-secondary w-full max-w-x input-md"
+          className="input input-bordered input-secondary w-full max-w-x input-sm md:input-md"
           value={newText}
           onChange={(e) => setNewText(e.target.value)}
         />
       </div>
 
-      <div className="flex justify-between">
-        <div className="flex-1 flex justify-center ">
+
+      <div className="flex flex-col md:flex-row justify-between ">
+        <div className="md:flex-1 flex my-2 md:my-0 justify-center ">
           <button
-            className="btn btn-outline btn-primary ml-2 flex-1"
+            className="btn btn-outline btn-primary ml-2 flex-1 btn-sm md:btn-md"
             type="button"
             onClick={() => setEditing(false)}
           >
@@ -124,8 +126,8 @@ const TodoListItem: React.FC<Props> = ({
           </button>
         </div>
 
-        <div className="flex-1 flex justify-center mr-2">
-          <button className="btn btn-outline btn-accent ml-2 flex-1" type="submit">
+        <div className="md:flex-1 flex justify-center md:mr-2">
+          <button className="btn btn-outline btn-accent ml-2 flex-1 btn-sm md:btn-md" type="submit">
             <div className="flex justify-center items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -144,27 +146,29 @@ const TodoListItem: React.FC<Props> = ({
               <span className="flex-1 ml-4 inline-block">Save</span>
             </div>
           </button>
+
         </div>
       </div>
     </form>
   );
   //border-2 border-yellow-500
+  // cursor-pointer label
 
   const viewTemplate = (
     <div className="flex flex-col mt-3">
-      <div className=" flex justify-between ">
-        <label className="cursor-pointer label ">
+      <div className="flex flex-col md:flex-row md:justify-between justify-center items-center">
+        <div className="flex justify-center items-center mt-3">
           <input
             type="checkbox"
-            className="checkbox-lg checkbox"
+            className="md:checkbox-lg checkbox checkbox-primary"
             defaultChecked={todo.complete}
           />
           <span className="ml-4 font-bold">{todo.text}</span>
-        </label>
+        </div>
         {timeOut ? outOfTime : timeLeft}
       </div>
 
-      <div className="flex justify-between">
+      <div className="md:flex justify-between md:my-2">
         <div className="flex-1 flex justify-center ">
           <button
             className="btn btn-outline btn-sm flex-1"
@@ -193,7 +197,7 @@ const TodoListItem: React.FC<Props> = ({
 
         <div className="mx-2"></div>
 
-        <div className="flex-1 flex justify-center ">
+        <div className="flex-1 flex justify-center  mt-2 md:mt-0">
           <button
             className="btn btn-outline btn-error btn-primary btn-sm flex-1"
             type="button"
