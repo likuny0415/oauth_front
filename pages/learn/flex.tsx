@@ -15,6 +15,10 @@ export default function Flex() {
         <div className="h-20 w-20 bg-green-500"></div>
       </div>
 
+      <div>
+          <input type="datetime-local" />
+      </div>
+
 
 
 
