@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
 import CountDown from "./countdown";
+import PriorityBadge from "./PriorityBadge";
 
 interface Props {
   todo: Todo;
@@ -34,6 +35,7 @@ const TodoListItem: React.FC<Props> = ({
 
   useEffect(() => {
     const interval = setInterval(() => {
+      console.log(todo.ddl);
       const target = todo.ddl;
       const now = new Date();
 
@@ -58,7 +60,7 @@ const TodoListItem: React.FC<Props> = ({
   }, [todo.ddl]);
 
   const timeLeft = (
-    <div className="flex font-mono my-2 md:my-0 ">
+    <div className="flex font-mono my-1 md:my-0 ">
       <CountDown timeUnit={day} unitType={"days"} />
       <CountDown timeUnit={hour} unitType={"hours"} />
       <CountDown timeUnit={minute} unitType={"min"} />
@@ -67,7 +69,7 @@ const TodoListItem: React.FC<Props> = ({
   );
 
   const outOfTime = (
-    <div className="flex items-center my-2 md:my-0 text-red-700">
+    <div className="flex items-center my-1 md:my-0 text-red-700">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="h-6 w-6"
@@ -87,21 +89,41 @@ const TodoListItem: React.FC<Props> = ({
   );
 
   const editingTemplate = (
-    <form className="flex flex-col md:flex-row mt-3" onSubmit={handleSubmit}>
-
-        <div className="md:hidden flex justify-center items-center my-2 ">
+    <form className="flex flex-col md:flex-row my-4" onSubmit={handleSubmit}>
+      <div className="md:hidden flex justify-center items-center my-2 ">
         <div className="badge badge-lg">Editing</div>
-        </div>
+      </div>
 
-      <div className="md:flex-1">
+      <div className="md:flex-1 input-group border-r-0 ">
         <input
           type="text"
-          className="input input-bordered input-secondary w-full max-w-x input-lg md:input-md"
+          className="input input-bordered input-secondary w-full max-w-lg border-r-0"
           value={newText}
           onChange={(e) => setNewText(e.target.value)}
         />
+        <div className="dropdown ">
+        <button tabIndex={0} className="btn bg-white text-red-400 border-secondary " onClick={(e) => e.preventDefault()}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
+            />
+          </svg>
+        </button>
+        {/* <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+    <li><a>Item 1</a></li>
+    <li><a>Item 2</a></li>
+  </ul> */}
+        </div>
       </div>
-
 
       <div className="flex flex-col md:flex-row justify-between ">
         <div className="md:flex-1 flex my-2 md:my-0 justify-center ">
@@ -131,7 +153,10 @@ const TodoListItem: React.FC<Props> = ({
         </div>
 
         <div className="md:flex-1 flex justify-center md:mr-2">
-          <button className="btn btn-outline btn-accent md:ml-2 flex-1" type="submit">
+          <button
+            className="btn btn-outline btn-accent md:ml-2 flex-1"
+            type="submit"
+          >
             <div className="flex justify-center items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -150,7 +175,6 @@ const TodoListItem: React.FC<Props> = ({
               <span className="flex-1 ml-4 inline-block">Save</span>
             </div>
           </button>
-
         </div>
       </div>
     </form>
@@ -169,7 +193,11 @@ const TodoListItem: React.FC<Props> = ({
           />
           <span className="ml-4 font-bold">{todo.text}</span>
         </div>
-        {timeOut ? outOfTime : timeLeft}
+        <div className="flex flex-col md:flex-row items-center mb-2 md:my-0">
+          {timeOut ? outOfTime : timeLeft}
+
+          <PriorityBadge priority={todo.priority} />
+        </div>
       </div>
 
       <div className="md:flex justify-between md:my-2">
@@ -227,6 +255,7 @@ const TodoListItem: React.FC<Props> = ({
           </button>
         </div>
       </div>
+      <div className="divider"></div>
     </div>
   );
 

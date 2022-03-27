@@ -1,7 +1,18 @@
+import { useState } from "react";
+
 export default function Flex() {
+    const [word, setWord] = useState("");
+
+    
+        const addWord: AddWord = (text: string) => {
+            const newWord = text;
+            setWord(newWord);
+          };
+
+
   return (
     <>
-      <div >
+      <div>
         <div className="h-20 w-20 bg-blue-500">Learn position</div>
         <p>This is a normal paragraph</p>
         <p className="border-2 border-red-600">Absolute below</p>
@@ -16,23 +27,43 @@ export default function Flex() {
       </div>
 
       <div>
-          <input type="datetime-local" />
+        <input type="datetime-local" className="select-bordered" />
       </div>
 
-
-
-
+      <div>
+        <label htmlFor="my-modal" className="btn btn-outline">
+          Create a new Todo
+        </label>
+        <input
+          type="checkbox"
+          id="my-modal"
+          className="modal-toggle bg-slate-300"
+        />
+        <div className="modal">
+          <div className="modal-box bg-red-300">
+            <input type="text" placeholder="Type here" className="input " />
+            <div className="modal-action">
+              {/* <label htmlFor="my-modal" className="btn">
+                Yay!
+              </label> */}
+              <button type="button" onClick={(e) => {
+                  e.preventDefault()
+                  addWord(word)
+              }}>Clicke me</button>
+            </div>
+          </div>
+        </div>
+      </div>
+]
+            
 
       <div className="md:flex md:justify-between border-2 boder-gray-600">
         <div className="flex-1 flex justify-center items-center h-56 w-56 bg-blue-500">
-            <span>This is a flexbox</span>
+          <span>This is a flexbox</span>
         </div>
         <div className="flex-1 h-56 w-56 bg-yellow-500"></div>
         <div className="flex-1 h-56 w-56 bg-green-500"></div>
       </div>
-
-
-
 
       <div className="flex">
         <div className="flex flex-col items-center border-2 border-red-200">
