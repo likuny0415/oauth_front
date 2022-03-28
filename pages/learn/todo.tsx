@@ -5,24 +5,18 @@ import { nanoid } from "nanoid";
 import dayjs from "dayjs";
 
 const initialTodos: Todo[] = [
-  {
-    id: "1",
-    text: "Walk the dog",
-    complete: false,
-    ddl: new Date("March 24, 2022 20:05:50"),
-    priority: "High",
-  },
+ 
   {
     id: "2",
     text: "Write app",
-    complete: true,
+    complete: false,
     ddl: new Date("March 29, 2022 20:50:21"),
     priority: "Low"
   },
   {
     id: "3",
     text: "Open the door",
-    complete: true,
+    complete: false,
     ddl: new Date("May 20, 2022 12:50:21"),
     priority: "Low"
   },
@@ -59,7 +53,7 @@ export default function MyToDo() {
       ddl: new Date(ddl),
       priority: priority
     };
-    setTodos([...todos, newTodo]);
+    setTodos([ newTodo,...todos]);
   };
 
   const deleteTodo: DeleteTodo = (id: string) => {

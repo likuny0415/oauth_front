@@ -7,7 +7,7 @@ module.exports = {
     extend: {
       animation: {
         blob: "blob 7s infinite",
-        todo: "toastProgress 1s",
+        todo: "toastProgress 0.5s",
       },
       keyframes: {
         blob: {

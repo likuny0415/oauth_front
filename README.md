@@ -78,3 +78,9 @@ Content-Type: text/html
 1. If current element' parent do not have a relative, it will go to the body
 2. If Absolute's parent have a ``relative``, it will position itself in it's parent
 
+
+##### Task4. Required not work in html
+1. Make sure all the input elements are inside of ```<form></form>```
+2. Make sure you have an element ```type="onSubmit"```
+3. Use ```onSubmit``` not ```onClick``` as a attribute in **form** not **button**
+

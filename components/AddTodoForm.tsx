@@ -13,7 +13,11 @@ export const AddTodoForm: React.FC<Props> = ({ addTodo }: Props) => {
   const currentDate = dayjs().format("YYYY-MM-DDThh:mm");
 
   return (
-    <form className="bg-gray-200 grid rounded justify-center">
+    <form className="bg-gray-200 grid rounded justify-center" onSubmit={(e) => {
+        e.preventDefault();
+        addTodo(text, ddl, priority);
+        setText("")
+      }}>
       <label htmlFor="todo" className="label justify-center">
         Your Todo
       </label>
@@ -23,8 +27,10 @@ export const AddTodoForm: React.FC<Props> = ({ addTodo }: Props) => {
         value={text}
         className="input input-bordered w-full max-w-xs"
         onChange={(e) => {
+            console.log(text)
           setText(e.target.value);
         }}
+        required
       />
       <label htmlFor="ddl" className="label justify-center">
         Deadline for this Todo
@@ -37,23 +43,21 @@ export const AddTodoForm: React.FC<Props> = ({ addTodo }: Props) => {
         onChange={(e) => {
           setDdl(Date.parse(e.target.value));
         }}
+        required
       />
       <label htmlFor="priority" className="label" >Priority of Todo</label>
-      <select id="priority" defaultValue={"High"} className="select w-full max-w-xs" onChange={(e) => setPriority(e.target.value)}>
-        <option disabled value="High" >
-          High
-        </option>
-        <option>High</option>
-        <option>Medium</option>
-        <option>Low</option>
+      <select id="priority" defaultValue={'Medium'}  className="select w-full max-w-xs" onChange={(e) => {
+          setPriority(e.target.value)          
+      }} required>
+
+        <option value="High">High</option>
+        <option value="Medium">Medium</option>
+        <option value="Low">Low</option>
       </select>
       <button
         type="submit"
         className="btn"
-        onClick={(e) => {
-          e.preventDefault();
-          addTodo(text, ddl, priority);
-        }}
+        
       >
         <span>Add Todo</span>
       </button>

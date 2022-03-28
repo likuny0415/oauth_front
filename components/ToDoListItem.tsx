@@ -38,7 +38,7 @@ const TodoListItem: React.FC<Props> = ({
     
     setEffect(true);
     
-    setTimeout(() => {deleteTodo(todo.id)}, 1000);
+    setTimeout(() => {deleteTodo(todo.id)}, 500);
   }
 
   useEffect(() => {
@@ -46,7 +46,7 @@ const TodoListItem: React.FC<Props> = ({
       
       const target = todo.ddl;
       const now = new Date();
-
+   
       const difference: number = target.getTime() - now.getTime();
       // ddl: new Date('March 24, 2022 19:20:00'),
       const day = Math.floor(difference / (1000 * 60 * 60 * 24));
@@ -207,6 +207,7 @@ const TodoListItem: React.FC<Props> = ({
             className="checkbox-lg checkbox checkbox-primary "
             defaultChecked={todo.complete}
             onClick={handleClick}
+            
           />
 
           <span className="ml-2 font-bold ">{todo.text}</span>
