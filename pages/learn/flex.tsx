@@ -12,6 +12,64 @@ export default function Flex() {
 
   return (
     <>
+
+<button className="m-2 p-10 text-white rounded-xl transition-all duration-500 bg-gradient-to-tl from-pink-500 via-red-500 to-yellow-400 bg-size-200 bg-pos-0 hover:bg-pos-100">Hover me Here</button>
+        <div>
+        <input
+          type="text"
+          className="input input-bordered input-secondary w-full max-w-lg border-r-0"
+         
+         
+        />
+        <div className="dropdown ">
+        <button tabIndex={0} className="btn bg-white text-red-400 border-secondary " >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
+            />
+          </svg>
+        </button>
+        <a href="#my-modal-2" className="btn"><svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
+            />
+          </svg></a>
+          </div>
+
+
+
+
+<div className="modal" id="my-modal-2">
+  <div className="modal-box">
+    <h3 className="font-bold text-lg">Congratulations random Interner user!</h3>
+    <p className="py-4">been selected for a chance to get one year of subscription to use Wikipedia for free!</p>
+    <div className="modal-action">
+     <a href="#" className="btn">Yay!</a>
+    </div>
+  </div>
+</div>
+        </div>
+
+
+
       <div>
         <div className="h-20 w-20 bg-blue-500">Learn position</div>
         <p>This is a normal paragraph</p>

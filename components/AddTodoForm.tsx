@@ -39,8 +39,8 @@ export const AddTodoForm: React.FC<Props> = ({ addTodo }: Props) => {
         }}
       />
       <label htmlFor="priority" className="label" >Priority of Todo</label>
-      <select id="priority" className="select w-full max-w-xs" onChange={(e) => setPriority(e.target.value)}>
-        <option disabled selected >
+      <select id="priority" defaultValue={"High"} className="select w-full max-w-xs" onChange={(e) => setPriority(e.target.value)}>
+        <option disabled value="High" >
           High
         </option>
         <option>High</option>

@@ -9,5 +9,12 @@
     .animation-delay-4000 {
       animation-delay: 4s;
     }
-  }
+    .animate-todo {
+        background: linear-gradient(#ffafbd, #ffc3a0) left no-repeat,
+        white;
+    }
+}
   
+/* #ffafbd, #ffc3a0 ok */
+/* #ddd6f3,#faaca8 */
+/* #eecda3,#ef629f */

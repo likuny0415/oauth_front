@@ -7,6 +7,7 @@ module.exports = {
     extend: {
       animation: {
         blob: "blob 7s infinite",
+        todo: "toastProgress 1s",
       },
       keyframes: {
         blob: {
@@ -23,6 +24,14 @@ module.exports = {
             transform: "tranlate(0px, 0px) scale(1)",
           },
         },
+        toastProgress: {
+          "0%": {
+            backgroundSize: "0% 100%",
+          },
+          "100%": {
+            backgroundSize: "100% 100%",
+          },
+        },
       },
     },
   },
@@ -37,4 +46,4 @@ module.exports = {
     prefix: "",
     darkTheme: "dark",
   },
-}
+};

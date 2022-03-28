@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
 import CountDown from "./countdown";
 import PriorityBadge from "./PriorityBadge";
@@ -26,6 +25,8 @@ const TodoListItem: React.FC<Props> = ({
   const [second, setSecond] = useState(0);
   const [timeOut, setTimeOut] = useState(false);
 
+  const [effect, setEffect] = useState(false);
+
   function handleSubmit(e) {
     e.preventDefault();
     editTodo(todo.id, newText);
@@ -33,9 +34,16 @@ const TodoListItem: React.FC<Props> = ({
     setEditing(false);
   }
 
+  function handleClick(e) {
+    
+    setEffect(true);
+    
+    setTimeout(() => {deleteTodo(todo.id)}, 1000);
+  }
+
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log(todo.ddl);
+      
       const target = todo.ddl;
       const now = new Date();
 
@@ -69,7 +77,7 @@ const TodoListItem: React.FC<Props> = ({
   );
 
   const outOfTime = (
-    <div className="flex items-center my-1 md:my-0 text-red-700">
+    <div className="flex items-center  md:my-0 text-red-700">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="h-6 w-6"
@@ -97,31 +105,30 @@ const TodoListItem: React.FC<Props> = ({
       <div className="md:flex-1 input-group border-r-0 ">
         <input
           type="text"
-          className="input input-bordered input-secondary w-full max-w-lg border-r-0"
+          className="input input-bordered input-secondary w-full max-w-lg border-r-0 hover:animation-todoDisappear"
           value={newText}
           onChange={(e) => setNewText(e.target.value)}
         />
         <div className="dropdown ">
-        <button tabIndex={0} className="btn bg-white text-red-400 border-secondary " onClick={(e) => e.preventDefault()}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
+          <button
+            tabIndex={0}
+            className="btn bg-white text-red-400 border-secondary "
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
-            />
-          </svg>
-        </button>
-        {/* <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-    <li><a>Item 1</a></li>
-    <li><a>Item 2</a></li>
-  </ul> */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
+              />
+            </svg>
+          </button>
         </div>
       </div>
 
@@ -180,20 +187,31 @@ const TodoListItem: React.FC<Props> = ({
     </form>
   );
   //border-2 border-yellow-500
-  // cursor-pointer label
+  // cursor-pointer label overflow-x-auto
+  // bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500
+  // bg-gradient-to-r from-cyan-500 to-blue-500
+  // "flex justify-center items-center my-1 "
+
+  // flex flex-col md:flex-row md:justify-between justify-center items-center
 
   const viewTemplate = (
-    <div className="flex flex-col mt-3">
-      <div className="flex flex-col md:flex-row md:justify-between justify-center items-center">
-        <div className="flex justify-center items-center mt-3">
+    <div className="flex flex-col mt-2 ">
+      <div  
+        className={`${
+          effect && "animate-todo "
+        } flex flex-col md:flex-row md:justify-between justify-center items-center`}
+      >
+        <div className=" flex justify-center items-center my-1">
           <input
             type="checkbox"
-            className="checkbox-lg checkbox checkbox-primary"
+            className="checkbox-lg checkbox checkbox-primary "
             defaultChecked={todo.complete}
+            onClick={handleClick}
           />
-          <span className="ml-4 font-bold">{todo.text}</span>
+
+          <span className="ml-2 font-bold ">{todo.text}</span>
         </div>
-        <div className="flex flex-col md:flex-row items-center mb-2 md:my-0">
+        <div className="flex flex-col md:flex-row items-center -mt-1 mb-1 md:my-0">
           {timeOut ? outOfTime : timeLeft}
 
           <PriorityBadge priority={todo.priority} />
@@ -255,7 +273,7 @@ const TodoListItem: React.FC<Props> = ({
           </button>
         </div>
       </div>
-      <div className="divider"></div>
+      <div className="divider my-1"></div>
     </div>
   );
 
