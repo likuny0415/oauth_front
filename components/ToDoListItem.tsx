@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { useEffect, useRef, useState } from "react";
 import CountDown from "./countdown";
 import PriorityBadge from "./PriorityBadge";
@@ -18,35 +19,38 @@ const TodoListItem: React.FC<Props> = ({
   editTodo,
 }: Props) => {
   const [isEditing, setEditing] = useState(false);
-  const [newText, setNewText] = useState("");
+  
   const [day, setDay] = useState(0);
   const [hour, setHour] = useState(0);
   const [minute, setMinute] = useState(0);
   const [second, setSecond] = useState(0);
   const [timeOut, setTimeOut] = useState(false);
-
   const [effect, setEffect] = useState(false);
+
+  const [newDddl, setNewDdl] = useState(todo.ddl.getTime());
+  const [newPriority, setNewPriority] = useState(todo.priority);
+  const [text, setText] = useState(todo.text);
+
+  const editTodoDate = dayjs(todo.ddl).format("YYYY-MM-DDThh:mm");
 
   function handleSubmit(e) {
     e.preventDefault();
-    editTodo(todo.id, newText);
-    setNewText("");
+    editTodo(todo.id, text, newDddl, newPriority);
     setEditing(false);
   }
 
   function handleClick(e) {
-    
     setEffect(true);
-    
-    setTimeout(() => {deleteTodo(todo.id)}, 500);
+    setTimeout(() => {
+      deleteTodo(todo.id);
+    }, 500);
   }
 
   useEffect(() => {
     const interval = setInterval(() => {
-      
       const target = todo.ddl;
       const now = new Date();
-   
+
       const difference: number = target.getTime() - now.getTime();
       // ddl: new Date('March 24, 2022 19:20:00'),
       const day = Math.floor(difference / (1000 * 60 * 60 * 24));
@@ -96,23 +100,80 @@ const TodoListItem: React.FC<Props> = ({
     </div>
   );
 
+  // after clicking the dot dot dot , i want a modal form to edit my todo
+  // it must have ddl and priority
+  // just create another modal form
+
+  const EditTodoForm = (
+    <div>
+      <label htmlFor="ddl" className="label justify-center">
+        Deadline for this Todo
+      </label>
+      <input
+        id="ddl"
+        type="datetime-local"
+        defaultValue={editTodoDate}
+        className="input input-bordered w-full max-w-xs "
+        onChange={(e) => {
+          console.log(Date.parse(e.target.value))
+          setNewDdl(Date.parse(e.target.value));
+        }}
+        required
+      />
+      <label htmlFor="priority" className="label">
+        Priority of Todo
+      </label>
+      <select
+        id="priority"
+        defaultValue={todo.priority}
+        className="select w-full max-w-xs"
+        onChange={(e) => {
+          setNewPriority(e.target.value);
+        }}
+        required
+      >
+        <option value="High">High</option>
+        <option value="Medium">Medium</option>
+        <option value="Low">Low</option>
+      </select>
+      <button type="submit" className="btn my-2">
+        <span>Add Todo</span>
+      </button>
+      </div>
+  );
+
   const editingTemplate = (
     <form className="flex flex-col md:flex-row my-4" onSubmit={handleSubmit}>
       <div className="md:hidden flex justify-center items-center my-2 ">
         <div className="badge badge-lg">Editing</div>
       </div>
 
+      <input type="checkbox" id="editTodo" className="modal-toggle" />
+      <label htmlFor="editTodo" className="modal cursor-pointer ">
+        <label className="modal-box relative bg-red-50" htmlFor="">
+          {EditTodoForm}
+          
+        </label>
+      </label>
+
       <div className="md:flex-1 input-group border-r-0 ">
         <input
           type="text"
           className="input input-bordered input-secondary w-full max-w-lg border-r-0 hover:animation-todoDisappear"
-          value={newText}
-          onChange={(e) => setNewText(e.target.value)}
+          defaultValue={text}
+          onChange={(e) => setText(e.target.value)}
         />
-        <div className="dropdown ">
+        <div className=" ">
           <button
             tabIndex={0}
             className="btn bg-white text-red-400 border-secondary "
+            onClick={(e) => {
+              e.preventDefault();
+              const myModal = document.getElementById(
+                "editTodo"
+              ) as HTMLInputElement;
+              myModal.checked = true;
+            }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -131,7 +192,7 @@ const TodoListItem: React.FC<Props> = ({
           </button>
         </div>
       </div>
-
+      
       <div className="flex flex-col md:flex-row justify-between ">
         <div className="md:flex-1 flex my-2 md:my-0 justify-center ">
           <button
@@ -196,7 +257,7 @@ const TodoListItem: React.FC<Props> = ({
 
   const viewTemplate = (
     <div className="flex flex-col mt-2 ">
-      <div  
+      <div
         className={`${
           effect && "animate-todo "
         } flex flex-col md:flex-row md:justify-between justify-center items-center`}
@@ -207,7 +268,6 @@ const TodoListItem: React.FC<Props> = ({
             className="checkbox-lg checkbox checkbox-primary "
             defaultChecked={todo.complete}
             onClick={handleClick}
-            
           />
 
           <span className="ml-2 font-bold ">{todo.text}</span>

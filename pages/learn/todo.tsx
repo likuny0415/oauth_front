@@ -60,12 +60,14 @@ export default function MyToDo() {
     setTodos(todos.filter((item) => item.id !== id));
   };
 
-  const editTodo: EditTodo = (id: string, text: string) => {
+  const editTodo: EditTodo = (id: string, text: string, newDdl: number, newPriority: string) => {
     const newTodos = todos.map((todo) => {
       if (todo.id == id) {
         return {
           ...todo,
           text: text,
+          ddl: new Date(newDdl),
+          priority: newPriority
         };
       }
       return todo;

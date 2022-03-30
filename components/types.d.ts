@@ -12,6 +12,6 @@ type AddTodo = (text: string, date: number, priority: string) => void
 
 type DeleteTodo = (id: string) => void
 
-type EditTodo = (id: string, text: string) => void;
+type EditTodo = (id: string, text: string, newDdl: number, newPriorty: string) => void;
 
 type AddWord = (text: string) => void;
