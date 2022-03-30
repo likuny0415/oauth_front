@@ -27,7 +27,7 @@ const TodoListItem: React.FC<Props> = ({
   const [timeOut, setTimeOut] = useState(false);
   const [effect, setEffect] = useState(false);
 
-  const [newDddl, setNewDdl] = useState(todo.ddl.getTime());
+  const [newDdl, setNewDdl] = useState(todo.ddl.getTime());
   const [newPriority, setNewPriority] = useState(todo.priority);
   const [text, setText] = useState(todo.text);
 
@@ -35,7 +35,7 @@ const TodoListItem: React.FC<Props> = ({
 
   function handleSubmit(e) {
     e.preventDefault();
-    editTodo(todo.id, text, newDddl, newPriority);
+    editTodo(todo.id, text, newDdl, newPriority);
     setEditing(false);
   }
 
@@ -115,7 +115,6 @@ const TodoListItem: React.FC<Props> = ({
         defaultValue={editTodoDate}
         className="input input-bordered w-full max-w-xs "
         onChange={(e) => {
-          console.log(Date.parse(e.target.value))
           setNewDdl(Date.parse(e.target.value));
         }}
         required
