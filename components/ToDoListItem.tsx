@@ -37,6 +37,10 @@ const TodoListItem: React.FC<Props> = ({
     e.preventDefault();
     editTodo(todo.id, text, newDdl, newPriority);
     setEditing(false);
+    const currentTime = new Date();
+    if (newDdl > currentTime.getTime()) {
+      setTimeOut(false)
+    }
   }
 
   function handleClick(e) {
@@ -52,20 +56,21 @@ const TodoListItem: React.FC<Props> = ({
       const now = new Date();
 
       const difference: number = target.getTime() - now.getTime();
-      // ddl: new Date('March 24, 2022 19:20:00'),
       const day = Math.floor(difference / (1000 * 60 * 60 * 24));
       const hour = Math.floor(
         (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
       );
       const minute = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
       const second = Math.floor((difference % (1000 * 60)) / 1000);
-      setDay(day);
-      setHour(hour);
-      setMinute(minute);
-      setSecond(second);
       if (day <= 0 && hour <= 0 && minute <= 0 && second <= 0) {
         setTimeOut(true);
       }
+      if (difference > 0) {
+        setDay(day);
+        setHour(hour);
+        setMinute(minute);
+        setSecond(second);
+      } 
     }, 1000);
 
     return () => clearInterval(interval);
@@ -165,7 +170,7 @@ const TodoListItem: React.FC<Props> = ({
         <div className=" ">
           <button
             tabIndex={0}
-            className="btn bg-white text-red-400 border-secondary "
+            className="btn bg-white text-red-400 border-secondary hover:bg-red-200 hover:border-secondary focus:border-secondary focus:ring-0"
             onClick={(e) => {
               e.preventDefault();
               const myModal = document.getElementById(
@@ -174,6 +179,7 @@ const TodoListItem: React.FC<Props> = ({
               myModal.checked = true;
             }}
           >
+            
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
