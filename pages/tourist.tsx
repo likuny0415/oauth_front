@@ -1,38 +1,37 @@
 import { useState } from "react";
-import { AddTodoForm } from "../../components/AddTodoForm";
-import { TodoList } from "../../components/TodoList";
 import { nanoid } from "nanoid";
-
+import { AddTodoForm } from "../components/AddTodoForm";
+import { TodoList } from "../components/TodoList";
 
 const initialTodos: Todo[] = [
- 
+  {
+    id: "1",
+    text: "Write English essay",
+    complete: false,
+    ddl: new Date(new Date().getTime() + 3600000 * 2),
+    priority: "High",
+  },
   {
     id: "2",
-    text: "Write app",
+    text: "Finish math quiz",
     complete: false,
-    ddl: new Date("March 29, 2022 20:50:21"),
-    priority: "High"
+    ddl: new Date(new Date().getTime() + 86400000),
+    priority: "Medium",
   },
   {
     id: "3",
-    text: "Open the door",
+    text: "Buy coffee",
     complete: false,
-    ddl: new Date("May 20, 2022 12:50:21"),
-    priority: "Medium"
-  },
-  {
-    id: "4",
-    text: "Keep the eyes open",
-    complete: false,
-    ddl: new Date("May 20, 2022 12:50:21"),
-    priority: "Low"
+    ddl: new Date(new Date().getTime() + 86400000 * 2),
+    priority: "Low",
   },
 ];
 
 export default function MyToDo() {
+  initialTodos.sort(sortTodos);
   const [todos, setTodos] = useState(initialTodos);
 
-  function sortTodos(a: Todo, b: Todo) :number {
+  function sortTodos(a: Todo, b: Todo): number {
     if (a.priority === b.priority) {
       return a.ddl.getTime() - b.ddl.getTime();
     }
@@ -40,7 +39,7 @@ export default function MyToDo() {
     const _b = b.priority.toLowerCase();
     const a_p = _a === "high" ? 1 : _a === "medium" ? 2 : 3;
     const b_p = _b === "high" ? 1 : _b === "medium" ? 2 : 3;
-    return a_p - b_p
+    return a_p - b_p;
   }
 
   const toggleTodo = (selectedTodo: Todo) => {
@@ -53,7 +52,6 @@ export default function MyToDo() {
       }
       return todo;
     });
-    
     setTodos(newTodos);
   };
 
@@ -63,41 +61,43 @@ export default function MyToDo() {
       text,
       complete: false,
       ddl: new Date(ddl),
-      priority: priority
+      priority: priority,
     };
-    const newTodos = [newTodo,...todos]
+    const newTodos = [newTodo, ...todos];
     newTodos.sort(sortTodos);
     setTodos(newTodos);
-    
   };
 
   const deleteTodo: DeleteTodo = (id: string) => {
     setTodos(todos.filter((item) => item.id !== id));
   };
 
-  const editTodo: EditTodo = (id: string, text: string, newDdl: number, newPriority: string) => {
+  const editTodo: EditTodo = (
+    id: string,
+    text: string,
+    newDdl: number,
+    newPriority: string
+  ) => {
     const newTodos = todos.map((todo) => {
       if (todo.id == id) {
         return {
           ...todo,
           text: text,
           ddl: new Date(newDdl),
-          priority: newPriority
+          priority: newPriority,
         };
       }
       return todo;
     });
-    newTodos.sort(sortTodos)
+    newTodos.sort(sortTodos);
     setTodos(newTodos);
   };
 
   return (
     <>
-      <div>
-        <div className="min-h-screen flex flex-col items-center my-10 px-16">
-
+      
+        <div className="min-h-screen flex flex-col items-center my-10 mx-16">
           <div className="w-full max-w-lg flex items-center justify-center">
-            
             <AddTodoForm addTodo={addTodo} />
           </div>
 
@@ -115,7 +115,7 @@ export default function MyToDo() {
             </div>
           </div>
         </div>
-      </div>
+      
     </>
   );
 }

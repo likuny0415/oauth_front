@@ -14,7 +14,6 @@ type ToggleTodo = (selectedTodo: Todo) => void;
 
 const TodoListItem: React.FC<Props> = ({
   todo,
-  toggleTodo,
   deleteTodo,
   editTodo,
 }: Props) => {
@@ -110,8 +109,8 @@ const TodoListItem: React.FC<Props> = ({
   // just create another modal form
 
   const EditTodoForm = (
-    <div>
-      <label htmlFor="ddl" className="label justify-center">
+    <div className="grid justify-center ">
+      <label htmlFor="ddl" className="label justify-center -mt-4">
         Deadline for this Todo
       </label>
       <input
@@ -130,7 +129,7 @@ const TodoListItem: React.FC<Props> = ({
       <select
         id="priority"
         defaultValue={todo.priority}
-        className="select w-full max-w-xs"
+        className="select w-full max-w-xs input input-bordered"
         onChange={(e) => {
           setNewPriority(e.target.value);
         }}
@@ -140,7 +139,7 @@ const TodoListItem: React.FC<Props> = ({
         <option value="Medium">Medium</option>
         <option value="Low">Low</option>
       </select>
-      <button type="submit" className="btn my-2">
+      <button type="submit" className="btn my-2 ">
         <span>Add Todo</span>
       </button>
       </div>
@@ -154,9 +153,8 @@ const TodoListItem: React.FC<Props> = ({
 
       <input type="checkbox" id="editTodo" className="modal-toggle" />
       <label htmlFor="editTodo" className="modal cursor-pointer ">
-        <label className="modal-box relative bg-red-50" htmlFor="">
+        <label className="modal-box relative" htmlFor="">
           {EditTodoForm}
-          
         </label>
       </label>
 
@@ -170,7 +168,7 @@ const TodoListItem: React.FC<Props> = ({
         <div className=" ">
           <button
             tabIndex={0}
-            className="btn bg-white text-red-400 border-secondary hover:bg-red-200 hover:border-secondary focus:border-secondary focus:ring-0"
+            className="btn bg-white text-red-400 border-secondary hover:text-purple-400 hover:bg-secondary hover:border-secondary focus:border-secondary focus:ring-0"
             onClick={(e) => {
               e.preventDefault();
               const myModal = document.getElementById(

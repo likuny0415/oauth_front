@@ -17,15 +17,15 @@ export const AddTodoForm: React.FC<Props> = ({ addTodo }: Props) => {
     const myModal = document.getElementById("my-modal") as HTMLInputElement;
     myModal.checked = false;
   }
-
+  
   const currentDate = dayjs().format("YYYY-MM-DDThh:mm");
 
   const TodoForm = (
     <form
-      className="bg-gray-200 grid rounded justify-center"
+      className=" grid rounded justify-center"
       onSubmit={handleSubmit}
     >
-      <label htmlFor="todo" className="label justify-center">
+      <label htmlFor="todo" className="label justify-center -mt-8">
         Your Todo
       </label>
       <input
@@ -51,13 +51,13 @@ export const AddTodoForm: React.FC<Props> = ({ addTodo }: Props) => {
         }}
         required
       />
-      <label htmlFor="priority" className="label">
+      <label htmlFor="priority" className="label justify-center">
         Priority of Todo
       </label>
       <select
         id="priority"
         defaultValue={"Medium"}
-        className="select w-full max-w-xs"
+        className="select w-full max-w-xs input-bordered"
         onChange={(e) => {
           setPriority(e.target.value);
         }}
@@ -75,15 +75,17 @@ export const AddTodoForm: React.FC<Props> = ({ addTodo }: Props) => {
 
   return (
     <>
+    
       <label htmlFor="my-modal" className="btn modal-button">
-        open modal
+        Add Todo
       </label>
       <input type="checkbox" id="my-modal" className="modal-toggle" />
       <label htmlFor="my-modal" className="modal cursor-pointer ">
-        <label className="modal-box relative bg-red-50" htmlFor="">
+        <label className="modal-box relative " htmlFor="">
           {TodoForm}
         </label>
       </label>
     </>
+
   );
 };
