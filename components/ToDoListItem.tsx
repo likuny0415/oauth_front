@@ -53,7 +53,6 @@ const TodoListItem: React.FC<Props> = ({
     const interval = setInterval(() => {
       const target = todo.ddl;
       const now = new Date();
-
       const difference: number = target.getTime() - now.getTime();
       const day = Math.floor(difference / (1000 * 60 * 60 * 24));
       const hour = Math.floor(

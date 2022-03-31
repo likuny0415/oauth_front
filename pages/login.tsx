@@ -30,9 +30,9 @@ export default function Login() {
   );
 
   const GoogleLogin = (
-    <button type="button" className="text-purple-200">
+    <button type="button">
       <Image src="/google_mark.svg" alt="google" width={40} height={40} />
-      Sign in with Google
+     
     </button>
   );
 
@@ -46,11 +46,9 @@ export default function Login() {
         />
       </Head>
 
-      <div className="flex mx-16 border-primary border-2 min-h-screen w-full ">
-        <div className="flex  justify-center items-center bg-red-200">
-
-        {GoogleLogin}
-        
+      <div className="flex justify-center items-center mx-16 border-primary border-2 min-h-screen  ">
+        <div className="border-2 border-purple-400">
+          This is the landing page
         </div>
         
       </div>

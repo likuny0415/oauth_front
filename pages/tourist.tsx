@@ -96,7 +96,7 @@ export default function MyToDo() {
   return (
     <>
       
-        <div className="min-h-screen flex flex-col items-center my-10 mx-16">
+        <div className="min-h-screen flex flex-col items-center my-10 mx-8">
           <div className="w-full max-w-lg flex items-center justify-center">
             <AddTodoForm addTodo={addTodo} />
           </div>
