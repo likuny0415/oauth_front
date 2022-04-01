@@ -112,7 +112,7 @@ export default function Flex() {
               type="text"
               id="todo"
               value={text}
-              className="input input-bordered w-full max-w-xs"
+              className="input input-bordered w-full"
               onChange={(e) => {
                 e.preventDefault();
                 
@@ -127,7 +127,7 @@ export default function Flex() {
               id="ddl"
               type="datetime-local"
               defaultValue={currentDate}
-              className="input input-bordered w-full max-w-xs "
+              className="input input-bordered w-full  "
               onChange={(e) => {
                 setDdl(Date.parse(e.target.value));
               }}
@@ -139,7 +139,7 @@ export default function Flex() {
             <select
               id="priority"
               defaultValue={"Medium"}
-              className="select w-full max-w-xs"
+              className="select w-full "
               onChange={(e) => {
                 setPriority(e.target.value);
               }}

@@ -22,42 +22,42 @@ export const AddTodoForm: React.FC<Props> = ({ addTodo }: Props) => {
 
   const TodoForm = (
     <form
-      className=" grid rounded justify-center"
+      className="flex flex-col rounded justify-center"
       onSubmit={handleSubmit}
     >
-      <label htmlFor="todo" className="label justify-center -mt-8">
-        Your Todo
+      <label htmlFor="todo" className="label justify-center ">
+        Todo
       </label>
       <input
         type="text"
         id="todo"
         value={text}
-        className="input input-bordered w-full max-w-xs"
+        className="input input-bordered w-full "
         onChange={(e) => {
           setText(e.target.value);
         }}
         required
       />
       <label htmlFor="ddl" className="label justify-center">
-        Deadline for this Todo
+        Deadline
       </label>
       <input
         id="ddl"
         type="datetime-local"
         defaultValue={currentDate}
-        className="input input-bordered w-full max-w-xs "
+        className="input input-bordered w-full"
         onChange={(e) => {
           setDdl(Date.parse(e.target.value));
         }}
         required
       />
       <label htmlFor="priority" className="label justify-center">
-        Priority of Todo
+        Priority 
       </label>
       <select
         id="priority"
         defaultValue={"Medium"}
-        className="select w-full max-w-xs input-bordered"
+        className="select w-full input-bordered"
         onChange={(e) => {
           setPriority(e.target.value);
         }}
@@ -67,7 +67,7 @@ export const AddTodoForm: React.FC<Props> = ({ addTodo }: Props) => {
         <option value="Medium">Medium</option>
         <option value="Low">Low</option>
       </select>
-      <button type="submit" className="btn my-2">
+      <button type="submit" className="btn mt-4">
         <span>Add Todo</span>
       </button>
     </form>

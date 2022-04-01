@@ -5,6 +5,15 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        inknut: "'Inknut Antiqua', serif",
+        alegreya: "'Alegreya Sans', sans-serif",
+        opensans: "'Open Sans', sans-serif",
+        
+      },
+      width: {
+        "px-400": "400px"
+      },
       animation: {
         blob: "blob 7s infinite",
         todo: "toastProgress 0.5s",

@@ -108,27 +108,27 @@ const TodoListItem: React.FC<Props> = ({
   // just create another modal form
 
   const EditTodoForm = (
-    <div className="grid justify-center ">
+    <div className="flex flex-col justify-center ">
       <label htmlFor="ddl" className="label justify-center -mt-4">
-        Deadline for this Todo
+        Deadline
       </label>
       <input
         id="ddl"
         type="datetime-local"
         defaultValue={editTodoDate}
-        className="input input-bordered w-full max-w-xs "
+        className="input  input-bordered w-full  "
         onChange={(e) => {
           setNewDdl(Date.parse(e.target.value));
         }}
         required
       />
-      <label htmlFor="priority" className="label">
-        Priority of Todo
+      <label htmlFor="priority" className="label justify-center">
+        Priority
       </label>
       <select
         id="priority"
         defaultValue={todo.priority}
-        className="select w-full max-w-xs input input-bordered"
+        className="select w-full input input-bordered"
         onChange={(e) => {
           setNewPriority(e.target.value);
         }}
@@ -138,7 +138,7 @@ const TodoListItem: React.FC<Props> = ({
         <option value="Medium">Medium</option>
         <option value="Low">Low</option>
       </select>
-      <button type="submit" className="btn my-2 ">
+      <button type="submit" className="btn mt-4">
         <span>Add Todo</span>
       </button>
       </div>
@@ -276,8 +276,9 @@ const TodoListItem: React.FC<Props> = ({
         </div>
         <div className="flex flex-col md:flex-row items-center -mt-1 mb-1 md:my-0">
           {timeOut ? outOfTime : timeLeft}
-
+          <div className="my-1">
           <PriorityBadge priority={todo.priority} />
+          </div>
         </div>
       </div>
 
