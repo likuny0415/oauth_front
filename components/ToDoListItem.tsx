@@ -75,7 +75,7 @@ const TodoListItem: React.FC<Props> = ({
   }, [todo.ddl]);
 
   const timeLeft = (
-    <div className="flex font-mono my-1 md:my-0 ">
+    <div className="flex font-mono my-1 md:mr-2 ">
       <CountDown timeUnit={day} unitType={"days"} />
       <CountDown timeUnit={hour} unitType={"hours"} />
       <CountDown timeUnit={minute} unitType={"min"} />
