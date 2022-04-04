@@ -25,8 +25,8 @@ const TodoListItem: React.FC<Props> = ({
   const [second, setSecond] = useState(0);
   const [timeOut, setTimeOut] = useState(false);
   const [effect, setEffect] = useState(false);
-
-  const [newDdl, setNewDdl] = useState(todo.ddl.getTime());
+  
+  const [newDdl, setNewDdl] = useState(dayjs(todo.ddl).valueOf());
   const [newPriority, setNewPriority] = useState(todo.priority);
   const [text, setText] = useState(todo.text);
 
@@ -51,9 +51,10 @@ const TodoListItem: React.FC<Props> = ({
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const target = todo.ddl;
-      const now = new Date();
-      const difference: number = target.getTime() - now.getTime();
+      const target = dayjs(todo.ddl);
+      const now = dayjs();
+      
+      const difference: number = target.valueOf() - now.valueOf()
       const day = Math.floor(difference / (1000 * 60 * 60 * 24));
       const hour = Math.floor(
         (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)

@@ -26,9 +26,6 @@ export default function Login() {
       </Head>
 
       <div className="bg-gray-100 min-h-screen flex items-center">
-         <div className="absolute top-0 -left-4 w-48 h-48 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-            <div className="absolute top-0 -right-4 w-48 h-48 bg-yellow-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-            <div className="absolute -bottom-8 left-20 w-48 h-48 bg-pink-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
         <div className="mx-auto bg-white w-px-400 rounded-md shadow-xl py-8 ">
           <span className="flex justify-center font-inknut text-3xl mb-4">
             {signup ? <span>Create Account</span> : <span>Kuny Todo</span>}

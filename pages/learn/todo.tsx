@@ -2,35 +2,16 @@ import { useState } from "react";
 import { AddTodoForm } from "../../components/AddTodoForm";
 import { TodoList } from "../../components/TodoList";
 import { nanoid } from "nanoid";
+import { NextPageContext } from "next";
+import TodoApi from "../../lib/api/todos";
+import dayjs from "dayjs";
 
 
-const initialTodos: Todo[] = [
- 
-  {
-    id: "2",
-    text: "Write app",
-    complete: false,
-    ddl: new Date("March 29, 2022 20:50:21"),
-    priority: "High"
-  },
-  {
-    id: "3",
-    text: "Open the door",
-    complete: false,
-    ddl: new Date("May 20, 2022 12:50:21"),
-    priority: "Medium"
-  },
-  {
-    id: "4",
-    text: "Keep the eyes open",
-    complete: false,
-    ddl: new Date("May 20, 2022 12:50:21"),
-    priority: "Low"
-  },
-];
 
-export default function MyToDo() {
-  const [todos, setTodos] = useState(initialTodos);
+
+export default function MyToDo({findTodos}) {
+    
+  const [todos, setTodos] = useState(findTodos);
 
   function sortTodos(a: Todo, b: Todo) :number {
     if (a.priority === b.priority) {
@@ -119,3 +100,13 @@ export default function MyToDo() {
     </>
   );
 }
+
+export async function getServerSideProps(context: NextPageContext) {
+  const findTodos = await TodoApi.findAll();
+  return {
+    props: {
+      findTodos
+    }
+  }
+}
+
