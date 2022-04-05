@@ -51,7 +51,7 @@ export default function MyToDo({findTodos}) {
     }
 
     
-  const [todos, setTodos] = useState(initialTodos);
+  const [todos, setTodos] = useState(findTodos);
 
   
 
@@ -133,13 +133,4 @@ export default function MyToDo({findTodos}) {
   );
 }
 
-// export async function getServerSideProps(context: NextPageContext) {
-//   const findTodos = await TodoApi.findAll()
-  
-//   return {
-//     props: {
-//       findTodos
-//     }
-//   }
-// }
 

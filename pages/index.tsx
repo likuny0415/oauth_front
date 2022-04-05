@@ -12,7 +12,7 @@ import MyToDo from "./learn/todo";
 
 export default function Home({ todos }) {
   
-
+  
 
   return (
     <>
@@ -36,7 +36,8 @@ export default function Home({ todos }) {
 export async function getServerSideProps(context: NextPageContext) {
   
  
-  
+  const cookie = context.req?.headers.cookie as string
+  const todos = await TodoApi.findAll(cookie);
   
   
 
@@ -62,7 +63,7 @@ export async function getServerSideProps(context: NextPageContext) {
   // }
 
   return {
-    props: {} // will be passed to the page component as props
+    props: {todos} 
   };
 }
 

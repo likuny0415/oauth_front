@@ -13,15 +13,7 @@ export default function Test() {
     const [todos, setTodos] = useState([]);
     const fetcher = (url) => fetch(url).then(res => res.json());
     // const { data, error} = useSWR("http://localhost:8000/api/v1/todo/findall", fetcher) 
-   
-    useEffect(() => {
-        
-        fetch("http://localhost:8000/api/v1/todo/findall")
-        .then((res) => res.json())
-        .then((data) => {
-            setTodos(data)
-        })
-    }, [])
+  
 
   
 //   if (error) return <div>Failed to load</div>

@@ -6,12 +6,15 @@ const TodoApi = {
    
     
 
-    findAll: async () => {
+    findAll: async (cookie: string) => {
         try {
           const response = await axios({
             method: "get",
             url: `${SERVER_BASE_URL}/todo/findall`,
-            withCredentials: true
+            withCredentials: true,
+            headers: {
+                "cookie": cookie
+            }
           });
           return response.data?.r;
         } catch (error) {
