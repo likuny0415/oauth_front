@@ -1,33 +1,45 @@
-import type { NextPage, NextPageContext } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import Link from 'next/link'
-import Router from 'next/router'
-import { TodoList } from '../components/TodoList'
-import TodoApi from '../lib/api/todos'
-import UserApi from '../lib/api/user'
+import type { NextPage, NextPageContext } from "next";
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
+import Router from "next/router";
+import useSWR from "swr";
+import { TodoList } from "../components/TodoList";
+import TodoApi from "../lib/api/todos";
+import UserApi from "../lib/api/user";
+import { SERVER_BASE_URL } from "../lib/utils/constant";
+import MyToDo from "./learn/todo";
 
-
-export default function Home({todos}) {
+export default function Home({ todos }) {
   
+
 
   return (
     <>
-    <h1>Successfully login in</h1>
-   <h1>Welcome to home page</h1>
-   
-   <Link href="/about"><a >1231231</a></Link>
-   <Link href="http://localhost:8000/api/v1/auth/logout"><a>Logout</a></Link>
-   <Link href="http://localhost:8000/api/v1/auth/me"><a>Me</a></Link>
-   </>
-  )
+    <MyToDo findTodos={todos} />
+      <Link href="/about">
+        <a>1231231</a>
+      </Link>
+      <Link href="http://localhost:8000/api/v1/auth/logout">
+        <a>Logout</a>
+      </Link>
+      <Link href="http://localhost:8000/api/v1/todo/findall">
+        <a>todos</a>
+      </Link>
+      <Link  href="http://localhost:8000/api/v1/auth/me">
+        <a className="mx-4">Me</a>
+      </Link>
+    </>
+  );
 }
 
 export async function getServerSideProps(context: NextPageContext) {
-
-  // const cookie = context.req?.headers.cookie as string;
- const todos = await TodoApi.findAll();
+  
  
+  
+  
+  
+
   // try {
   //   const { data } = await UserApi.whoami();
   //   const todos = await TodoApi.findAll();
@@ -42,19 +54,17 @@ export async function getServerSideProps(context: NextPageContext) {
   //     // const something = await TodoApi.findTodos(userId)
   //   }
 
-
   // } catch (error) {
-    
+
   //   // context.res?.writeHead(302, {
   //   //   Location: "http://localhost:3000/login"
   //   // }).end()
   // }
 
   return {
-    props: {}, // will be passed to the page component as props
-  }
+    props: {} // will be passed to the page component as props
+  };
 }
-
 
 // Home.getInitialProps = async (context: NextPageContext) => {
 //   // 1. check cookie
@@ -71,9 +81,6 @@ export async function getServerSideProps(context: NextPageContext) {
 //       Location: "http://localhost:3000/login"
 //     }).end()
 //   }
-  
-
-  
 
 //   // try {
 //   //   resp = await fetch("http://localhost:8000/api/v1/auth/me", {
@@ -83,10 +90,9 @@ export async function getServerSideProps(context: NextPageContext) {
 //   //     }
 //   //   })
 //   // } catch (error) {
-//   //   
+//   //
 //   // }
- 
-  
+
 //   // if (resp.status === 401 && !context.req) {
 //   //   Router.replace('/login')
 //   //   return;
@@ -98,19 +104,10 @@ export async function getServerSideProps(context: NextPageContext) {
 //   //   })
 //   //   context.res?.end()
 //   // }
-  
-  
+
 //   // data.userId can be extracted from userId
-  
+
 //   return {
 //     props: {}
 //   };
-// } 
-
-
-
-
-
-
-
-
+// }

@@ -6,7 +6,7 @@ const UserApi = {
     const { data } = await axios.get(`${SERVER_BASE_URL}/auth/me`, {
       headers: {
         "Content-Type": "application/json",
-        // cookie: cookie,
+        
       },
     });
     return { data };

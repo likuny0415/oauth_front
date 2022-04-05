@@ -5,24 +5,55 @@ import { nanoid } from "nanoid";
 import { NextPageContext } from "next";
 import TodoApi from "../../lib/api/todos";
 import dayjs from "dayjs";
+import useSWR from "swr";
+import { SERVER_BASE_URL } from "../../lib/utils/constant";
+import axios from "axios";
 
+const initialTodos: Todo[] = [
+ 
+  {
+    id: "2",
+    text: "Write app",
+    complete: false,
+    ddl: new Date("March 29, 2022 20:50:21"),
+    priority: "High"
+  },
+  {
+    id: "3",
+    text: "Open the door",
+    complete: false,
+    ddl: new Date("May 20, 2022 12:50:21"),
+    priority: "Medium"
+  },
+  {
+    id: "4",
+    text: "Keep the eyes open",
+    complete: false,
+    ddl: new Date("May 20, 2022 12:50:21"),
+    priority: "Low"
+  },
+];
 
 
 
 export default function MyToDo({findTodos}) {
-    
-  const [todos, setTodos] = useState(findTodos);
 
-  function sortTodos(a: Todo, b: Todo) :number {
-    if (a.priority === b.priority) {
-      return a.ddl.getTime() - b.ddl.getTime();
+
+    function sortTodos(a: Todo, b: Todo) :number {
+      if (a.priority === b.priority) {
+        return dayjs(a.ddl).valueOf() - dayjs(b.ddl).valueOf();
+      }
+      const _a = a.priority.toLowerCase();
+      const _b = b.priority.toLowerCase();
+      const a_p = _a === "high" ? 1 : _a === "medium" ? 2 : 3;
+      const b_p = _b === "high" ? 1 : _b === "medium" ? 2 : 3;
+      return a_p - b_p
     }
-    const _a = a.priority.toLowerCase();
-    const _b = b.priority.toLowerCase();
-    const a_p = _a === "high" ? 1 : _a === "medium" ? 2 : 3;
-    const b_p = _b === "high" ? 1 : _b === "medium" ? 2 : 3;
-    return a_p - b_p
-  }
+
+    
+  const [todos, setTodos] = useState(initialTodos);
+
+  
 
   const toggleTodo = (selectedTodo: Todo) => {
     const newTodos = todos.map((todo) => {
@@ -38,7 +69,7 @@ export default function MyToDo({findTodos}) {
     setTodos(newTodos);
   };
 
-  const addTodo: AddTodo = (text: string, ddl: number, priority: string) => {
+  const addTodo: AddTodo = async (text: string, ddl: number, priority: string) => {
     const newTodo = {
       id: "todo-" + nanoid(),
       text,
@@ -47,7 +78,8 @@ export default function MyToDo({findTodos}) {
       priority: priority
     };
     const newTodos = [newTodo,...todos]
-    newTodos.sort(sortTodos);
+    const status =  await TodoApi.createTodo(newTodo)
+    
     setTodos(newTodos);
     
   };
@@ -101,12 +133,13 @@ export default function MyToDo({findTodos}) {
   );
 }
 
-export async function getServerSideProps(context: NextPageContext) {
-  const findTodos = await TodoApi.findAll();
-  return {
-    props: {
-      findTodos
-    }
-  }
-}
+// export async function getServerSideProps(context: NextPageContext) {
+//   const findTodos = await TodoApi.findAll()
+  
+//   return {
+//     props: {
+//       findTodos
+//     }
+//   }
+// }
 

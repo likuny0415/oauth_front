@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 export function middleware(req: NextRequest) {
-  const url = req.nextUrl.clone()
-  // Only rewrite requests to `/`, as _middleware on the `/pages` root will be executed in every request of the app.
-    const cookies = req.cookies;
-    if (cookies["accessToken"]) {
+//   const url = req.nextUrl.clone()
+//   // Only rewrite requests to `/`, as _middleware on the `/pages` root will be executed in every request of the app.
+//     const cookies = req.cookies;
+//     if (cookies["accessToken"]) {
         
-    }
-  return ""
+//     }
+//   return ""
   
 }
 
