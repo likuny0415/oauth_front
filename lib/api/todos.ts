@@ -42,6 +42,55 @@ const TodoApi = {
             return error
         }
     },
+    finishTodo: async (todoId: string) => {
+      try {
+          const response = await axios({
+              method: "post",
+              withCredentials: true,
+              url: `${SERVER_BASE_URL}/todo/finish`,
+              data: {
+                  id: todoId,
+              },
+          })
+          return response.data
+      } catch(error) {
+          return error
+      }
+  },
+  deleteTodo: async (todoId: string) => {
+    try {
+        const response = await axios({
+            method: "post",
+            withCredentials: true,
+            url: `${SERVER_BASE_URL}/todo/delete`,
+            data: {
+                id: todoId,
+            },
+        })
+        return response.data
+    } catch(error) {
+        return error
+    }
+},
+editTodo: async (id: string, text: string, newDdl: Date, newPriority: number) => {
+  try {
+      const response = await axios({
+          method: "post",
+          withCredentials: true,
+          url: `${SERVER_BASE_URL}/todo/update`,
+          data: {
+              id: id,
+              text: text,
+              ddl: newDdl,
+              priority: newPriority
+
+          },
+      })
+      return response.data
+  } catch(error) {
+      return error
+  }
+},
 };
 
 

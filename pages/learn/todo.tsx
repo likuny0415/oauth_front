@@ -14,21 +14,21 @@ const initialTodos: Todo[] = [
   {
     id: "2",
     text: "Write app",
-    complete: false,
+    complete: 1,
     ddl: new Date("March 29, 2022 20:50:21"),
     priority: 3
   },
   {
     id: "3",
     text: "Open the door",
-    complete: false,
+    complete: 1,
     ddl: new Date("May 20, 2022 12:50:21"),
     priority: 2
   },
   {
     id: "4",
     text: "Keep the eyes open",
-    complete: false,
+    complete: 1,
     ddl: new Date("May 20, 2022 12:50:21"),
     priority: 1
   },
@@ -38,18 +38,15 @@ const initialTodos: Todo[] = [
 
 export default function MyToDo({findTodos}) {
 
-
-    function sortTodos(a: Todo, b: Todo) :number {
-      if (a.priority === b.priority) {
-        return dayjs(a.ddl).valueOf() - dayjs(b.ddl).valueOf();
-      }
-      return b.priority - a.priority
-    }
-
-    
   const [todos, setTodos] = useState(findTodos);
 
-  
+  function sortTodos(a: Todo, b: Todo) :number {
+    if (a.priority === b.priority) {
+      return dayjs(a.ddl).valueOf() - dayjs(b.ddl).valueOf();
+    }
+    return b.priority - a.priority
+  }
+
 
   const toggleTodo = (selectedTodo: Todo) => {
     const newTodos = todos.map((todo) => {
@@ -66,27 +63,31 @@ export default function MyToDo({findTodos}) {
   };
 
   const addTodo: AddTodo = async (text: string, ddl: number, priority: number) => {
-    
-    
     const newTodo = {
       id: "todo-" + nanoid(),
       text,
-      complete: false,
+      complete: 1,
       ddl: new Date(ddl),
       priority: priority
     };
+    
     const newTodos = [newTodo,...todos]
-    const status =  await TodoApi.createTodo(newTodo)
-    
-    // setTodos(newTodos);
-    
+    newTodos.sort(sortTodos)
+    setTodos(newTodos);
+    await TodoApi.createTodo(newTodo)
   };
 
-  const deleteTodo: DeleteTodo = (id: string) => {
+  const finishTodo: FinishTodo = async (id: string) => {
+    await TodoApi.finishTodo(id);
     setTodos(todos.filter((item) => item.id !== id));
   };
 
-  const editTodo: EditTodo = (id: string, text: string, newDdl: number, newPriority: number) => {
+  const deleteTodo: DeleteTodo = async (id: string) => {
+    await TodoApi.deleteTodo(id)
+    setTodos(todos.filter((item) => item.id !== id));
+  }
+
+  const editTodo: EditTodo = async (id: string, text: string, newDdl: number, newPriority: number) => {
     const newTodos = todos.map((todo) => {
       if (todo.id == id) {
         return {
@@ -98,6 +99,7 @@ export default function MyToDo({findTodos}) {
       }
       return todo;
     });
+    await TodoApi.editTodo(id, text, new Date(newDdl), newPriority);
     newTodos.sort(sortTodos)
     setTodos(newTodos);
   };
@@ -118,8 +120,9 @@ export default function MyToDo({findTodos}) {
             <div className="absolute -bottom-8 left-20 w-48 h-48 bg-pink-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div> */}
             <div className="relative ">
               <TodoList
-                todos={findTodos}
+                todos={todos}
                 toggleTodo={toggleTodo}
+                finishTodo={finishTodo}
                 deleteTodo={deleteTodo}
                 editTodo={editTodo}
               />

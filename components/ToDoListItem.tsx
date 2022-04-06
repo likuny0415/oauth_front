@@ -6,16 +6,18 @@ import PriorityBadge from "./PriorityBadge";
 interface Props {
   todo: Todo;
   toggleTodo: ToggleTodo;
-  deleteTodo: DeleteTodo;
+  finishTodo: FinishTodo;
   editTodo: EditTodo;
+  deleteTodo: DeleteTodo;
 }
 
 type ToggleTodo = (selectedTodo: Todo) => void;
 
 const TodoListItem: React.FC<Props> = ({
   todo,
-  deleteTodo,
+  finishTodo,
   editTodo,
+  deleteTodo
 }: Props) => {
   const [isEditing, setEditing] = useState(false);
   
@@ -30,7 +32,7 @@ const TodoListItem: React.FC<Props> = ({
   const [newPriority, setNewPriority] = useState(todo.priority);
   const [text, setText] = useState(todo.text);
 
-  const editTodoDate = dayjs(todo.ddl).format("YYYY-MM-DDThh:mm");
+  const editTodoDate = dayjs(new Date()).format("YYYY-MM-DDThh:mm");
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -45,14 +47,20 @@ const TodoListItem: React.FC<Props> = ({
   function handleClick(e) {
     setEffect(true);
     setTimeout(() => {
-      deleteTodo(todo.id);
+      finishTodo(todo.id)
     }, 500);
+    
+    
   }
 
   function priorityNumber(value: string) {
     const lowerCaseP = value.toLowerCase();
     const priorityNumber = lowerCaseP == "low" ? 1 : lowerCaseP == "high" ? 3: 2;
     return priorityNumber
+  }
+
+  function priorityNumToString(value: number) {
+    return value == 1 ? "Low" : value == 2 ? "Medium" : "High";
   }
 
   useEffect(() => {
@@ -134,9 +142,10 @@ const TodoListItem: React.FC<Props> = ({
       </label>
       <select
         id="priority"
-        defaultValue={todo.priority}
+        defaultValue={priorityNumToString(todo.priority)}
         className="select w-full input input-bordered"
         onChange={(e) => {
+          console.log(e.target.value)
           setNewPriority(priorityNumber(e.target.value));
         }}
         required
@@ -275,7 +284,7 @@ const TodoListItem: React.FC<Props> = ({
           <input
             type="checkbox"
             className="checkbox-lg checkbox checkbox-primary "
-            defaultChecked={todo.complete}
+            defaultChecked={false}
             onClick={handleClick}
           />
 
