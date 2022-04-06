@@ -49,6 +49,12 @@ const TodoListItem: React.FC<Props> = ({
     }, 500);
   }
 
+  function priorityNumber(value: string) {
+    const lowerCaseP = value.toLowerCase();
+    const priorityNumber = lowerCaseP == "low" ? 1 : lowerCaseP == "high" ? 3: 2;
+    return priorityNumber
+  }
+
   useEffect(() => {
     const interval = setInterval(() => {
       const target = dayjs(todo.ddl);
@@ -131,7 +137,7 @@ const TodoListItem: React.FC<Props> = ({
         defaultValue={todo.priority}
         className="select w-full input input-bordered"
         onChange={(e) => {
-          setNewPriority(e.target.value);
+          setNewPriority(priorityNumber(e.target.value));
         }}
         required
       >

@@ -8,7 +8,7 @@ interface Props {
 export const AddTodoForm: React.FC<Props> = ({ addTodo }: Props) => {
   const [text, setText] = useState("");
   const [ddl, setDdl] = useState(0);
-  const [priority, setPriority] = useState("");
+  const [priority, setPriority] = useState(2);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -19,6 +19,12 @@ export const AddTodoForm: React.FC<Props> = ({ addTodo }: Props) => {
   }
   
   const currentDate = dayjs().format("YYYY-MM-DDThh:mm");
+
+  function priorityNumber(value: string) {
+    const lowerCaseP = value.toLowerCase();
+    const priorityNumber = lowerCaseP == "low" ? 1 : lowerCaseP == "high" ? 3: 2;
+    return priorityNumber
+  }
 
   const TodoForm = (
     <form
@@ -59,7 +65,7 @@ export const AddTodoForm: React.FC<Props> = ({ addTodo }: Props) => {
         defaultValue={"Medium"}
         className="select w-full input-bordered"
         onChange={(e) => {
-          setPriority(e.target.value);
+          setPriority(priorityNumber(e.target.value));
         }}
         required
       >

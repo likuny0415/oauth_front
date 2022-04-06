@@ -1,10 +1,10 @@
 interface Props {
-    priority: string;
+    priority: number;
 }
 
 export default function PriorityBadge({priority} :Props) {
 
-    const lowerCase = priority.toLowerCase();
+    
 
     const HighPriority = (
         <span className="badge badge-error text-white">High</span>
@@ -18,5 +18,5 @@ export default function PriorityBadge({priority} :Props) {
         <span className="badge  badge-success text-white">Low</span>
     )
 
-    return <div>{lowerCase === "low" ? LowPriority : (lowerCase === "high" ? HighPriority : MediumPriority)}</div>
+    return <div>{priority === 1 ? LowPriority : (priority === 3 ? HighPriority : MediumPriority)}</div>
 }

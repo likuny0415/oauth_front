@@ -3,15 +3,15 @@ interface Todo {
     text: string;
     complete: boolean;
     ddl: Date;
-    priority: string;
+    priority: number;
 }
 
 type ToggleTodo = (selectedTodo: Todo) => void;
 
-type AddTodo = (text: string, date: number, priority: string) => void
+type AddTodo = (text: string, date: number, priority: number) => void
 
 type DeleteTodo = (id: string) => void
 
-type EditTodo = (id: string, text: string, newDdl: number, newPriorty: string) => void;
+type EditTodo = (id: string, text: string, newDdl: number, newPriorty: number) => void;
 
 type AddWord = (text: string) => void;

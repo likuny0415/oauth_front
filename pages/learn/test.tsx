@@ -4,33 +4,44 @@ import { useEffect, useState } from "react";
 import useSWR from "swr";
 import Loading from "../../components/Loading";
 import TodoApi from "../../lib/api/todos";
+import MyToDo from "./todo";
 
 
 
 
 
-export default function Test() {
+export default function Test({cookie}) {
     const [todos, setTodos] = useState([]);
-    const fetcher = (url) => fetch(url).then(res => res.json());
-    // const { data, error} = useSWR("http://localhost:8000/api/v1/todo/findall", fetcher) 
+    function fetcher(url, cookie) {
+        return fetch(url, {
+          method: "get",
+          headers: { "Content-Type": "application/json", "cookie": cookie },
+          credentials: 'include'
+        }).then(res => res.json())
+        .then((data) => data.r);
+      }
+    const { data, error} = useSWR(["http://localhost:8000/api/v1/todo/findall", cookie], fetcher) 
   
+    
+    
+  
+  if (error) return <div>Failed to load</div>
+  if (!data) return <Loading />
+
 
   
-//   if (error) return <div>Failed to load</div>
-//   if (!data) return <Loading />
-
-
-  
-//     return (
-//        <div>
+    return (
+       <div>
              
-//           {data ? data.map((todo) => {return <h1 key={todo.id}>{todo.text}</h1>}) : <h1>bad</h1>}
-//        </div>
-//     )
-return <h1>Hello</h1>
+         <MyToDo findTodos={data} />
+       </div>
+    )
+// return <h1>Hello</h1>
 }
 
 export async function getClient(context: NextPageContext) {
-    
+    const cookie = context.req?.headers.cookie
+
+    return { props: { cookie}}
     
 }
