@@ -1,12 +1,15 @@
-import { NextPageContext } from "next";
+import { NextPage, NextPageContext } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import Router, { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import useSWR from "swr";
 import * as Yup from "yup";
 import LoginForm from "../components/LoginForm";
 import SignUp from "../components/SignupForm";
+import UserApi from "../lib/api/user";
 
 export default function Login() {
   const [signup, setSignup] = useState(false);
@@ -23,6 +26,7 @@ export default function Login() {
           name="login"
           content="Please login to use fully-featured application."
         />
+        <meta name="google-site-verification" content="luzEBfmYJt0MYLlCQdcL6LDj3Fc1KE-NRJC2yvV3z-c" />
       </Head>
 
       <div className="bg-gray-100 min-h-screen flex items-center">
@@ -107,3 +111,23 @@ export default function Login() {
     </>
   );
 }
+
+export async function getServerSideProps (context: NextPageContext) {
+  const cookie = context.req?.headers.cookie 
+  if (cookie) {
+    const res = await UserApi.isLoggedIn(cookie);
+    if (res) {
+      context.res
+      ?.writeHead(301, {
+        Location: "http://localhost:3000/",
+      })
+      .end();
+    }
+    
+  }
+
+  return {
+    props: {}
+  }
+}
+

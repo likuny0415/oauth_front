@@ -11,12 +11,14 @@ import { SERVER_BASE_URL } from "../lib/utils/constant";
 import MyToDo from "./learn/todo";
 
 export default function Home({ todos }) {
-  
-  
+
+
+
+ 
 
   return (
     <>
-    <MyToDo findTodos={todos} />
+      <MyToDo findTodos={todos} />
       <Link href="/about">
         <a>1231231</a>
       </Link>
@@ -26,7 +28,7 @@ export default function Home({ todos }) {
       <Link href="http://localhost:8000/api/v1/todo/findall">
         <a>todos</a>
       </Link>
-      <Link  href="http://localhost:8000/api/v1/auth/me">
+      <Link href="http://localhost:8000/api/v1/auth/me">
         <a className="mx-4">Me</a>
       </Link>
     </>
@@ -34,12 +36,22 @@ export default function Home({ todos }) {
 }
 
 export async function getServerSideProps(context: NextPageContext) {
+  const cookie = context.req?.headers.cookie as string;
+  if (!cookie) {
+    context.res
+      ?.writeHead(301, {
+        Location: "http://localhost:3000/login",
+      })
+      .end();
+  } else {
+    const todos = await TodoApi.findAll(cookie);
+    return {
+      props: { todos },
+    };
+  }
+
   
- 
-  const cookie = context.req?.headers.cookie as string
-  const todos = await TodoApi.findAll(cookie);
-  
-  
+}
 
   // try {
   //   const { data } = await UserApi.whoami();
@@ -62,10 +74,6 @@ export async function getServerSideProps(context: NextPageContext) {
   //   // }).end()
   // }
 
-  return {
-    props: {todos} 
-  };
-}
 
 // Home.getInitialProps = async (context: NextPageContext) => {
 //   // 1. check cookie

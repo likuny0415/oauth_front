@@ -1,7 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
 import { yupResolver } from "@hookform/resolvers/yup";
+import Router, { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
+import UserApi from "../lib/api/user";
 import DisplayErrorText from "./DisplayErrorText";
 import ErrorText from "./ErrorText";
 
@@ -12,10 +14,21 @@ export default function LoginForm({ toggleSignup }) {
       .required("Required"),
     password: Yup.string().required("Required"),
   });
-
-  function onSubmit(data) {
-    console.log(JSON.stringify(data, null, 4));
-    return false;
+  const router = useRouter()
+  
+  async function onSubmit(data) {
+    try {
+      const res = await UserApi.login(data);
+      if (res) {
+        const { loggedIn } = res || false;
+        if (loggedIn) {
+          router.replace('/')
+        }
+      }
+    } catch (error) {
+      console.log(error)
+    }
+    // return false;
   }
 
   const formOptions = { resolver: yupResolver(loginSchema) };

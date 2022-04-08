@@ -20,8 +20,12 @@ export default function Test({cookie}) {
         }).then(res => res.json())
         .then((data) => data.r);
       }
-    const { data, error} = useSWR(["http://localhost:8000/api/v1/todo/findall", cookie], fetcher) 
-  
+    const { data, error ,isValidating} = useSWR(["http://localhost:8000/api/v1/todo/findall", cookie], fetcher) 
+    
+    // now I want to have a global state, so that when i
+    // logged in, it will keep me in the index page and 
+    // when I enter /login page, it will redirect me 
+    // to the index page
  
     
   
