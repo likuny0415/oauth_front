@@ -112,22 +112,22 @@ export default function Login() {
   );
 }
 
-export async function getServerSideProps (context: NextPageContext) {
-  const cookie = context.req?.headers.cookie 
-  if (cookie) {
-    const res = await UserApi.isLoggedIn(cookie);
-    if (res) {
-      context.res
-      ?.writeHead(301, {
-        Location: "http://localhost:3000/",
-      })
-      .end();
-    }
+// export async function getServerSideProps (context: NextPageContext) {
+//   const cookie = context.req?.headers.cookie 
+//   if (cookie) {
+//     const res = await UserApi.isLoggedIn(cookie);
+//     if (res) {
+//       context.res
+//       ?.writeHead(301, {
+//         Location: "http://localhost:3000/",
+//       })
+//       .end();
+//     }
     
-  }
+//   }
 
-  return {
-    props: {}
-  }
-}
+//   return {
+//     props: {}
+//   }
+// }
 
