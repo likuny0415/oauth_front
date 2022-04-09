@@ -12,16 +12,18 @@ import MyToDo from "./learn/todo";
 
 export default function Home({ todos }) {
 
-
-
- 
-
   return (
     <>
+    <Head>
+      <title>Todo</title>
+    </Head>
       <MyToDo findTodos={todos} />
-      <Link href="/about">
-        <a>1231231</a>
+
+
+      <Link href={process.env.NEXT_PUBLIC_GOOGLE_PAGE!}>
+        <a>Google</a>
       </Link>
+
       <Link href="http://localhost:8000/api/v1/auth/logout">
         <a>Logout</a>
       </Link>
@@ -37,21 +39,29 @@ export default function Home({ todos }) {
 
 export async function getServerSideProps(context: NextPageContext) {
   const cookie = context.req?.headers.cookie as string;
+  
   if (!cookie) {
     context.res
       ?.writeHead(301, {
-        Location: "http://localhost:3000/login",
+        Location: process.env.LOGIN_PAGE,
       })
       .end();
+      return { props: { } }
   } else {
     const todos = await TodoApi.findAll(cookie);
     return {
       props: { todos },
     };
   }
-
-  
 }
+
+// const result = await UserApi.isLoggedIn(cookie);
+  // console.log(result)
+
+  // if (result.status == 401 && !context.req) {
+  //   Router.replace("/login")
+  // }
+  
 
   // try {
   //   const { data } = await UserApi.whoami();

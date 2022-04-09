@@ -15,25 +15,25 @@ export default function LoginForm({ toggleSignup }) {
     password: Yup.string().required("Required"),
   });
   const router = useRouter()
-  
+
+  const formOptions = { resolver: yupResolver(loginSchema) };
+  const { register, handleSubmit, formState, setError } = useForm(formOptions);
+  const { errors } = formState;
+
   async function onSubmit(data) {
     try {
       const res = await UserApi.login(data);
       if (res) {
-        const { loggedIn } = res || false;
-        if (loggedIn) {
-          router.replace('/')
-        }
-      }
-    } catch (error) {
-      console.log(error)
+        Router.replace('/')
+      } else {
+        setError('apiError', { message: "The username and/or password you specified are not correct."})
     }
-    // return false;
+    } catch (error) {
+      return error
+    }
   }
 
-  const formOptions = { resolver: yupResolver(loginSchema) };
-  const { register, handleSubmit, formState } = useForm(formOptions);
-  const { errors } = formState;
+ 
 
   return (
     <>
@@ -57,7 +57,7 @@ export default function LoginForm({ toggleSignup }) {
           {...register("password")}
         />
         <DisplayErrorText _error={errors.password} />
-       
+        <DisplayErrorText _error={errors.apiError} />
         <button
           type="submit"
           className="p-2 mt-6 font-alegreya bg-sky-400 hover:bg-sky-500 hover:border-sky-500 text-white rounded"

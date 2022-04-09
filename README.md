@@ -84,3 +84,17 @@ Content-Type: text/html
 2. Make sure you have an element ```type="onSubmit"```
 3. Use ```onSubmit``` not ```onClick``` as a attribute in **form** not **button**
 
+#### Tasks5. Cannot set headers after they are sent to the client
+1. getServerSideProps must have a ```return { props: {} }```, otherwise
+it will cry
+2. should not use 
+```ts
+if (...) res.json().end()
+if (...) res.json().end();
+
+// instead should if / else if to avoid this format to avoid responses errors
+if (...) res.json().end();
+else if (...) res.json().end()
+```
+
+

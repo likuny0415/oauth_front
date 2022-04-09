@@ -88,46 +88,32 @@ export default function Login() {
           </div>
         </div>
       </div>
-
-      {/* <div>
-      <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-      </div>
-
-      
-      <div className="auth-page">
-        <div className="container page">
-          <div className="row">
-            <div className="col-md-6 offset-md-3 col-xs-12">
-              <h1 className="text-xs-center">Sign in</h1>
-              <p className="text-xs-center">successfully login in</p>
-              <a href="http://localhost:8000/api/v1/auth/logout">Logout</a>
-              <a href="http://localhost:8000/api/v1/auth/me">ME</a>
-            </div>
-          </div>
-        </div>
-      </div> */}
     </>
   );
 }
 
-// export async function getServerSideProps (context: NextPageContext) {
-//   const cookie = context.req?.headers.cookie 
-//   if (cookie) {
-//     const res = await UserApi.isLoggedIn(cookie);
-//     if (res) {
-//       context.res
-//       ?.writeHead(301, {
-//         Location: "http://localhost:3000/",
-//       })
-//       .end();
-//     }
-    
-//   }
+export async function getServerSideProps (context: NextPageContext) {
 
-//   return {
-//     props: {}
-//   }
-// }
+  
+  const cookie = context.req?.headers.cookie as string
+  
+  if (cookie) {
+    const res = await UserApi.isLoggedIn(cookie);
+    if (res) {
+      context.res
+      ?.writeHead(302, {
+        Location: process.env.HOME_PAGE
+      })
+      .end();
+      // even with end() function, still need to return props
+      return {
+        props: {}
+      }
+    }
+  } else {
+    return {
+      props: {}
+    }
+  }
+}
 
