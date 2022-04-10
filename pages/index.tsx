@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Router from "next/router";
 import useSWR from "swr";
+import Navbar from "../components/Navbar";
 import { TodoList } from "../components/TodoList";
 import TodoApi from "../lib/api/todos";
 import UserApi from "../lib/api/user";
@@ -14,9 +15,11 @@ export default function Home({ todos }) {
 
   return (
     <>
+
     <Head>
       <title>Todo</title>
     </Head>
+    <Navbar />
       <MyToDo findTodos={todos} />
 
 
@@ -46,11 +49,11 @@ export async function getServerSideProps(context: NextPageContext) {
         Location: process.env.LOGIN_PAGE,
       })
       .end();
-      return { props: { } }
+      return { props: {} }
   } else {
     const todos = await TodoApi.findAll(cookie);
     return {
-      props: { todos },
+      props: { todos: JSON.parse(JSON.stringify(todos)) },
     };
   }
 }

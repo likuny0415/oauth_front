@@ -5,7 +5,7 @@ import "../styles/nprogress.css";
 
 import Router from "next/router";
 import nProgress from "nprogress";
-
+import Navbar from '../components/Navbar'
 
 
 Router.events.on("routeChangeStart", nProgress.start);
