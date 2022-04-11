@@ -3,6 +3,7 @@ import { useState } from "react";
 export default function Nav() {
 
     const [mounted, setMounted] = useState(false);
+
     
 
     function handleClick(e) {

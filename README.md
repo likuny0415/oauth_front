@@ -97,4 +97,26 @@ if (...) res.json().end();
 else if (...) res.json().end()
 ```
 
+#### Tasks6. How to get HTML from a url
+```ts
+ await fetch(url)
+    .then(function (response) {
+        switch (response.status) {
+            // status "OK"
+            case 200:
+                return response.text();
+            // status "Not Found"
+            case 404:
+                throw response;
+        }
+    })
+    .then(function (template) {
+        console.log(template);
+    })
+    .catch(function (response) {
+        // "Not Found"
+        console.log(response.statusText);
+    });
+```
+
 

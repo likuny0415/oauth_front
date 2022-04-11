@@ -62,8 +62,8 @@ export default function MobileMenu() {
             className="border-b text-gray-900 text-sm font-semibold"
             style={{ transitionDelay: '175ms' }}
           >
-            <Link href="/guestbook">
-              <a className="flex w-auto pb-4 justify-center">Urls</a>
+            <Link href="/bookmarks">
+              <a className="flex w-auto pb-4 justify-center">Bookmarks</a>
             </Link>
           </li>
          

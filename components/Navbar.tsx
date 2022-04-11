@@ -24,8 +24,8 @@ function NavItem({ href, text }) {
 
 export default function Nav() {
   return (
-    <div className="container mx-auto px-32">
-      <nav className="flex justify-between mx-auto pt-8 text-gray-900">
+    <div className="container mx-auto px-32 bg-red-50">
+      <nav className="flex justify-between mx-auto bg-red-300 pt-8 text-gray-900">
         <a className="flex text-teal-500">
           <span className="self-center md:text-2xl text-md ">Kuny Utils</span>
         </a>
@@ -33,7 +33,7 @@ export default function Nav() {
         <div className="ml-[-0.60rem]">
           <MobileMenu />
           <NavItem href="/" text="Todo" />
-          <NavItem href="/urls" text="Urls" />
+          <NavItem href="/bookmarks" text="Bookmarks" />
           <NavItem href="#" text="Accounts" />
           
         </div>

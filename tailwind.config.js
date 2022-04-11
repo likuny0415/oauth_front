@@ -11,6 +11,9 @@ module.exports = {
         opensans: "'Open Sans', sans-serif",
         
       },
+      container: {
+        center: true
+      },
       width: {
         "px-400": "400px"
       },
