@@ -33,7 +33,7 @@ export default function SignUp({ toggleSignup }) {
       } else if (res.code == 200) {
         setIsSignupSuccess(true)
         setTimeout(() => {
-          Router.replace('/')
+          Router.replace('/login')
         }, 1000)
       }
     } catch (error) {     

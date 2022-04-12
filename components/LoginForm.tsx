@@ -24,7 +24,7 @@ export default function LoginForm({ toggleSignup }) {
     try {
       const res = await UserApi.login(data);
       if (res) {
-        Router.replace('/')
+        // Router.replace('/')
       } else {
         setError('apiError', { message: "The username and/or password you specified are not correct."})
     }

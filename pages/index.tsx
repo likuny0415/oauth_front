@@ -45,7 +45,7 @@ export async function getServerSideProps(context: NextPageContext) {
   
   if (!cookie) {
     context.res
-      ?.writeHead(301, {
+      ?.writeHead(302, {
         Location: process.env.LOGIN_PAGE,
       })
       .end();
