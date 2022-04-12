@@ -50,7 +50,7 @@ export default function Login() {
               
               <div className="flex justify-center">
                 <a
-                  href="http://localhost:8000/api/v1/auth/github"
+                  href={process.env.NEXT_PUBLIC_GITHUB_LOGIN}
                   className="mx-8"
                 >
                   <Image
@@ -63,7 +63,7 @@ export default function Login() {
                   />
                 </a>
                 <a
-                  href="http://localhost:8000/api/v1/auth/google"
+                  href={process.env.NEXT_PUBLIC_GOOGLE_LOGIN}
                   className="mx-8"
                 >
                   <Image

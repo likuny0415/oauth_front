@@ -21,7 +21,7 @@ export default function Bookmarks({template}) {
         />
         </Head>
         <Navbar />
-        <div className="container mt-10 grid grid-cols-3  text-center gap-4">
+        <div className="container mt-10 grid md:grid-cols-3  text-center gap-4 ">
           <div className="bg-red-50">1</div>
           <div className="bg-red-50">2</div>
           <div className="bg-red-50">3</div>

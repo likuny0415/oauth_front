@@ -23,7 +23,7 @@ export default function Home({ todos }) {
       <MyToDo findTodos={todos} />
 
 
-      <Link href={process.env.NEXT_PUBLIC_GOOGLE_PAGE!}>
+      {/* <Link href={process.env.NEXT_PUBLIC_GOOGLE_PAGE!}>
         <a>Google</a>
       </Link>
 
@@ -35,7 +35,7 @@ export default function Home({ todos }) {
       </Link>
       <Link href="http://localhost:8000/api/v1/auth/me">
         <a className="mx-4">Me</a>
-      </Link>
+      </Link> */}
     </>
   );
 }
