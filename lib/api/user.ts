@@ -8,11 +8,12 @@ const UserApi = {
       const response = await axios({
         method: "post",
         url: `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/auth/login`,
-        withCredentials: true,
         data: {
           username: email,
           password,
         },
+   
+        withCredentials: true,
       });
       return response.data;
     } catch (error) {

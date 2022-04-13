@@ -18,6 +18,18 @@ const TodoApi = {
       return error;
     }
   },
+  findAllT: async () => {
+    try {
+      const response = await axios({
+        method: "get",
+        url: `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/todo/findall`,
+        withCredentials: true,
+      });
+      return response.data?.r;
+    } catch (error) {
+      return error;
+    }
+  },
   createTodo: async (newTodo: Todo) => {
     try {
       const { id, text, ddl, complete, priority } = newTodo;
