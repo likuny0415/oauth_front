@@ -20,7 +20,7 @@ export default function Home({ todos }) {
       <title>Todo</title>
     </Head>
     <Navbar />
-      {/* <MyToDo findTodos={todos} /> */}
+      <MyToDo findTodos={todos} />
 
 
       {/* <Link href={process.env.NEXT_PUBLIC_GOOGLE_PAGE!}>
