@@ -1,20 +1,15 @@
 import axios from "axios";
-import { SERVER_BASE_URL } from "../utils/constant";
+
 
 const UserApi = {
   login: async (data) => {
     try {
       const { email, password } = data;
-      const response = await axios({
-        method: "post",
-        url: `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/auth/login`,
-        data: {
-          username: email,
-          password,
-        },
-   
-        withCredentials: true,
-      });
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/auth/login`, {
+        username: email,
+         password: password
+      });   
+
       return response.data;
     } catch (error) {
       return "";

@@ -145,7 +145,7 @@ const TodoListItem: React.FC<Props> = ({
         defaultValue={priorityNumToString(todo.priority)}
         className="select w-full input input-bordered"
         onChange={(e) => {
-          console.log(e.target.value)
+          
           setNewPriority(priorityNumber(e.target.value));
         }}
         required

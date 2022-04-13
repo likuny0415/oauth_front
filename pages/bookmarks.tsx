@@ -7,7 +7,7 @@ export default function Bookmarks({template}) {
     // <BookmarkList bookmarks={bookmarks}>
     // <BookmarkItem bookmark={bookmark} >
 
-    console.log(template)
+    
    
     
 

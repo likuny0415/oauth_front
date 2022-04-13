@@ -3,9 +3,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Router, { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
-import UserApi from "../lib/api/user";
+import UserApi  from "../lib/api/user";
 import DisplayErrorText from "./DisplayErrorText";
 import ErrorText from "./ErrorText";
+import cookie from 'js-cookie'
 
 export default function LoginForm({ toggleSignup }) {
   const loginSchema = Yup.object().shape({
@@ -21,16 +22,24 @@ export default function LoginForm({ toggleSignup }) {
   const { errors } = formState;
 
   async function onSubmit(data) {
-    try {
-      const res = await UserApi.login(data);
-      if (res) {
-        // Router.replace('/')
-      } else {
-        setError('apiError', { message: "The username and/or password you specified are not correct."})
-    }
-    } catch (error) {
-      return error
-    }
+    const res = await fetch('/api/login', {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+    // try {
+    //   const res = await UserApi.login(data)
+    //   cookie.set("accessToken", res.jwt)
+    //   if (res) {
+    //     Router.replace('/')
+    //   } else {
+    //     setError('apiError', { message: "The username and/or password you specified are not correct."})
+    // }
+    // } catch (error) {
+    //   return error
+    // }
   }
 
  

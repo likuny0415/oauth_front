@@ -41,25 +41,28 @@ export default function Home({ todos }) {
 }
 
 export async function getServerSideProps(context: NextPageContext) {
-  // const cookie = context.req?.headers.cookie as string;
-  const todos = await TodoApi.findAllT();
-  console.log(todos)
-  return {
-    props: { todos: JSON.parse(JSON.stringify(todos)) },
-  };
+  const cookie = context.req?.headers.cookie as string;
   
-  // if (!cookie) {
-  //   context.res
-  //     ?.writeHead(302, {
-  //       Location: process.env.LOGIN_PAGE,
-  //     })
-  //     .end();
-  //     return { props: {} }
-  // } else {
-  //   // const todos = await TodoApi.findAll(cookie);
+  
+  
+  // const todos = await TodoApi.findAllT();
+  // console.log(todos)
+  // return {
+  //   props: { todos: JSON.parse(JSON.stringify(todos)) },
+  // };
+  
+  if (!cookie) {
+    context.res
+      ?.writeHead(302, {
+        Location: process.env.LOGIN_PAGE,
+      })
+      .end();
+      return { props: {} }
+  } else {
+    const todos = await TodoApi.findAll(cookie);
+    return { props: { todos}}
     
-    
-  // }
+  }
 }
 
 // const result = await UserApi.isLoggedIn(cookie);
