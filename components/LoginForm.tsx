@@ -28,18 +28,14 @@ export default function LoginForm({ toggleSignup }) {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(data)
-    })
-    // try {
-    //   const res = await UserApi.login(data)
-    //   cookie.set("accessToken", res.jwt)
-    //   if (res) {
-    //     Router.replace('/')
-    //   } else {
-    //     setError('apiError', { message: "The username and/or password you specified are not correct."})
-    // }
-    // } catch (error) {
-    //   return error
-    // }
+    }).then(response => response.json())
+    .then(data => data);
+    const isLoggedIn = res.isLoggedIn;
+    if (isLoggedIn) {
+      Router.replace("/")
+    } else {
+      setError('apiError', { message: "The username and/or password you specified are not correct."})
+    }
   }
 
  
