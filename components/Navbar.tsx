@@ -72,6 +72,7 @@ export default function Nav() {
         <div className="ml-[-0.60rem]">
           <MobileMenu />
           <NavItem href="/" text="Todo" />
+          <NavItem href="/pics" text="Pics" />
           <Accounts />
         </div>
       </nav>
