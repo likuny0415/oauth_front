@@ -1,5 +1,6 @@
 import Loading from "./Loading";
 import Photo from "./Photo";
+import Masonry from "react-responsive-masonry";
 
 export default function GalleryGrid(props) {
     const { data, loading } = props;
@@ -18,21 +19,17 @@ export default function GalleryGrid(props) {
         )
     }
 
-
-
     return (
         <div className="container mt-12 flex flex-row flex-wrap items-stretch md:flex-nowrap ">
-           
-           {data.map((grid, index) => (
-                <div key={`gallery-${index}`} className="">
-                {grid.map((item, itemIndex) => (
-                    <div key={`${item.id} - ${itemIndex}` } className="ml-2">
-                        <Photo data={item} />
-                    </div>
-                ))}
+          <Masonry columnsCount={3} gutter="20px" >
+            {data.map((item, itemIndex) => (
+                <div key={itemIndex}>
+                    <Photo data={item} />
                 </div>
-            ))}
+            )) }
+          </Masonry>
            
-    </div>
+           
+      </div>
     )
 }

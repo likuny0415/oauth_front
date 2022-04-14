@@ -13,13 +13,13 @@ export default function Pics() {
   const [query, setQuery] = useState(undefined);
   const options = {
     root: null,
-    rootMargin: "10px",
+    rootMargin: "100% 0px",
     threshold: 1.0,
   };
   const { isVisible, containerRef } = useOnScreen(options);
   const { data, isLoading, isError, isLoadingMore, isReachingEnd } =
     useUnsplash({ isVisible, query });
-  console.log(isVisible);
+
 
   if (data) {
     return (
@@ -28,7 +28,7 @@ export default function Pics() {
           <title>Pics</title>
         </Head>
         <Navbar />
-        <GalleryGrid data={generateColumns(data)} loading={isLoading} />
+        <GalleryGrid data={data} loading={isLoading} />
         <LoadMore
           containerRef={containerRef}
           error={isError}

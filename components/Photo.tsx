@@ -12,10 +12,13 @@ export default function Photo(props) {
       <Image
         src={urls.regular}
         unoptimized
-        height={height}
         width={width}
+        height={height}
         alt={alt_description}
         className="rounded-lg"
+        placeholder="blur"
+        blurDataURL={urls.thumb}
+        loading="lazy"
       />
      <div className="invisible group-hover:visible ">
      <div className="absolute flex top-2 right-2 p-2 rounded-md bg-gray-50/80
