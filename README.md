@@ -99,7 +99,7 @@ else if (...) res.json().end()
 
 #### Tasks6. How to get HTML from a url
 ```ts
- await fetch(url)
+ await fetch("https://tailwindcss.com/docs/grid-template-columns")
     .then(function (response) {
         switch (response.status) {
             // status "OK"

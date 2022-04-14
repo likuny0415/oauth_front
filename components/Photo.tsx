@@ -17,8 +17,35 @@ export default function Photo(props) {
         alt={alt_description}
         className="rounded-lg"
       />
+     <div className="invisible group-hover:visible ">
+     <div className="absolute flex top-2 right-2 p-2 rounded-md bg-gray-50/80
+      items-center justify-center text-black/75  hover:text-black hover:bg-gray-50
+      ">
+      <button
+        title="Like"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-5 w-5"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            fillRule="evenodd"
+            d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+            clipRule="evenodd"
+          />
+        </svg>
+      </button>
+      </div>
 
-      <div className="absolute  bottom-[6px] left-0 flex w-full items-center gap-2 rounded-b-lg p-4 opacity-0 transition duration-200 ease-in-out group-hover:bg-zinc-800/60 group-hover:opacity-100">
+      <div
+        className="absolute bottom-[6px] left-0 flex w-full items-center
+       gap-2 rounded-b-lg p-4 
+       transition duration-200 ease-in-out 
+       group-hover:bg-zinc-800/50
+       "
+      >
         <Image
           className="rounded-full"
           unoptimized
@@ -33,28 +60,13 @@ export default function Photo(props) {
           <a
             target="_blank"
             rel="noreferrer"
-            className="text-zinc-50 hover:underline"
+            className="text-zinc-200 hover:underline hover:text-zinc-50 "
           >
             {name}
           </a>
         </Link>
-        <button className="text-red-200 hover:text-red-500" title="Save">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-            />
-          </svg>
-        </button>
       </div>
+     </div>
     </div>
   );
 }

@@ -18,20 +18,13 @@ export default function GalleryGrid(props) {
         )
     }
 
-    // console.log(generateColumns(data))
-    // const a = generateColumns(data);
-    // console.log(a.map((grid, index) => {
-    //     grid.map((item, itemIndex) => {
-    //         console.log("item is", item, " itemIndex is", itemIndex)
-    //     })
-    // }))
-    console.log(data)
+
 
     return (
         <div className="container mt-12 flex flex-row flex-wrap items-stretch md:flex-nowrap ">
            
            {data.map((grid, index) => (
-                <div key={`gallery-${index}`}>
+                <div key={`gallery-${index}`} className="">
                 {grid.map((item, itemIndex) => (
                     <div key={`${item.id} - ${itemIndex}` } className="ml-2">
                         <Photo data={item} />

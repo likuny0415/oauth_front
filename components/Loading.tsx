@@ -1,10 +1,10 @@
 export default function Loading() {
   return (
-      <div className="flex min-h-screen justify-center items-center bg-gray-100">
+      <div className="flex min-h-screen justify-center items-center ">
     <div className="">
       <svg
         role="status"
-        className="mr-2 w-16 h-16 text-gray-200 animate-spin dark:text-gray-600 fill-pink-600"
+        className="mr-2 w-16 h-16  animate-spin dark:text-gray-600 fill-pink-600"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
