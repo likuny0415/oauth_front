@@ -8,7 +8,7 @@ export default function Photo(props) {
   const { name, profile_image, links } = user;
 
   return (
-    <div className="group relative">
+    <div className="group relative block">
       <Image
         src={urls.regular}
         unoptimized
