@@ -7,7 +7,7 @@ export default function Search(props) {
 
   return (
     <>
-    <div className="mx-8">
+    <div className="md:mx-56">
       <div className="container flex items-center mt-6 rounded-xl border-indigo-600 border">
         <span className="pl-3 pr-2">
           <svg

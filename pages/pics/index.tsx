@@ -1,11 +1,12 @@
 import Head from "next/head";
 import { useState } from "react";
-import GalleryGrid from "../components/GalleryGrid";
-import LoadMore from "../components/LoadMore";
-import Navbar from "../components/Navbar";
-import Search from "../components/Search";
-import useOnScreen from "../lib/hooks/use-on-screen";
-import useUnsplash from "../lib/hooks/use-splash.hook";
+import GalleryGrid from "../../components/GalleryGrid";
+import LoadMore from "../../components/LoadMore";
+import Navbar from "../../components/Navbar";
+import PicsNav from "../../components/PicsNav";
+import Search from "../../components/Search";
+import useOnScreen from "../../lib/hooks/use-on-screen";
+import useUnsplash from "../../lib/hooks/use-splash.hook";
 
 export default function Pics() {
   const [query, setQuery] = useState(undefined);
@@ -24,7 +25,9 @@ export default function Pics() {
         <title>Pics</title>
       </Head>
       <Navbar />
+      <PicsNav />
       <Search value={query} onChange={(value) => setQuery(value)}/>
+      
       <GalleryGrid data={data} loading={isLoading} />
       <LoadMore
         containerRef={containerRef}

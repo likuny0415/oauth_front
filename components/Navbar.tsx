@@ -5,7 +5,12 @@ import MobileMenu from "./MobileMenu";
 
 function NavItem({ href, text }) {
   const router = useRouter();
-  const isActive = router.asPath === href;
+  let isActive;
+  if (href == "/") {
+    isActive = router.asPath === href
+  } else {
+    isActive = router.asPath.split("/").includes("pics")
+  }
   return (
     <Link href={href}>
       <a
@@ -16,6 +21,7 @@ function NavItem({ href, text }) {
           "hidden md:inline-block p-1 sm:px-3 sm:py-2 rounded-lg hover:bg-gray-200  transition-all"
         )}
       >
+        
         <span className="capsize">{text}</span>
       </a>
     </Link>
