@@ -105,7 +105,6 @@ export async function getServerSideProps (context: NextPageContext) {
         Location: process.env.HOME_PAGE
       })
       .end();
-      // even with end() function, still need to return props
       return {
         props: {}
       }

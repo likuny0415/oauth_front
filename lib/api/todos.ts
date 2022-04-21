@@ -1,7 +1,5 @@
 import axios from "axios";
 
-import { SERVER_BASE_URL } from "../utils/constant";
-
 const TodoApi = {
   findAll: async (cookie: string) => {
     try {

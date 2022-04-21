@@ -1,12 +1,23 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import { createToast } from "vercel-toast";
+
+import PhotoApi from "../lib/api/photos";
 
 export default function Photo(props) {
   const { data } = props;
 
   const { width, height, alt_description, urls, user } = data;
   const { name, profile_image, links } = user;
-
+  const [like, setLike] = useState(false);
+  async function handleClick(e) {
+    e.preventDefault();
+    const res = await PhotoApi.like(data)
+    
+  }
+  
+  
   return (
     <div className="group relative block">
       <Image
@@ -20,12 +31,14 @@ export default function Photo(props) {
         blurDataURL={urls.thumb}
         loading="lazy"
       />
+
      <div className="invisible group-hover:visible ">
      <div className="absolute flex top-2 right-2 p-2 rounded-md bg-gray-50/80
       items-center justify-center text-black/75  hover:text-black hover:bg-gray-50
       ">
       <button
         title="Like"
+        onClick={handleClick}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -73,3 +86,5 @@ export default function Photo(props) {
     </div>
   );
 }
+
+
