@@ -9,6 +9,7 @@ export default function useUnsplash({ isVisible, query = "forest" }) {
         (index) => `/api/unsplash?page=${index + 1}&query=${searchValue}`,
         fetcher
     )
+    
 
     const isError = !!error
     const isLoading = !data && !isError;
