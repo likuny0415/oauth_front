@@ -19,9 +19,6 @@ export default function Login() {
     setSignup(isSignup);
   };
 
-  function loginWithGithub(e) {
-  
-  }
 
   return (
     <>
@@ -57,7 +54,6 @@ export default function Login() {
                 <a
                   href={process.env.NEXT_PUBLIC_GITHUB_LOGIN}
                   className="mx-8"
-                  onClick={loginWithGithub}
                 >
                   <Image
                     src="/github_mark.png"
