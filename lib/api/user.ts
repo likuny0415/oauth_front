@@ -52,6 +52,18 @@ const UserApi = {
       return error;
     }
   },
+  loginWithGithub: async () => {
+    try {
+      const response = await axios({
+        method: "get",
+        url: `${process.env.NEXT_PUBLIC_GITHUB_LOGIN}`
+      })
+      console.log(response);
+      return response;
+    } catch (error) {
+      return error;
+    }
+  },
   isLoggedIn: async (cookie: string) => {
     try {
       const response = await axios({

@@ -18,6 +18,12 @@ export default function Login() {
     setSignup(isSignup);
   };
 
+  const loginWithGithub = async () => {
+    window.open(process.env.NEXT_PUBLIC_GITHUB_LOGIN, "git", "left=100,top=100,width=320,height=320")
+   
+  
+  }
+
   return (
     <>
       <Head>
@@ -50,8 +56,9 @@ export default function Login() {
               
               <div className="flex justify-center">
                 <a
-                  href={process.env.NEXT_PUBLIC_GITHUB_LOGIN}
+                  // href={process.env.NEXT_PUBLIC_GITHUB_LOGIN}
                   className="mx-8"
+                  onClick={loginWithGithub}
                 >
                   <Image
                     src="/github_mark.png"
@@ -60,6 +67,7 @@ export default function Login() {
                     width={32}
                     layout="intrinsic"
                     className="opacity-40 hover:opacity-100"
+                   
                   />
                 </a>
                 <a
@@ -84,6 +92,7 @@ export default function Login() {
                     <a className="opacity-100 ml-2 text-indigo-600">Demo User</a>
                   </Link>
               </div>
+
             </div>
           </div>
         </div>
