@@ -10,6 +10,7 @@ import * as Yup from "yup";
 import LoginForm from "../components/LoginForm";
 import SignUp from "../components/SignupForm";
 import UserApi from "../lib/api/user";
+import cookie from "cookie";
 
 export default function Login() {
   const [signup, setSignup] = useState(false);
@@ -18,9 +19,7 @@ export default function Login() {
     setSignup(isSignup);
   };
 
-  const loginWithGithub = async () => {
-    window.open(process.env.NEXT_PUBLIC_GITHUB_LOGIN, "git", "left=100,top=100,width=320,height=320")
-   
+  function loginWithGithub(e) {
   
   }
 
@@ -56,7 +55,7 @@ export default function Login() {
               
               <div className="flex justify-center">
                 <a
-                  // href={process.env.NEXT_PUBLIC_GITHUB_LOGIN}
+                  href={process.env.NEXT_PUBLIC_GITHUB_LOGIN}
                   className="mx-8"
                   onClick={loginWithGithub}
                 >
@@ -104,10 +103,12 @@ export default function Login() {
 export async function getServerSideProps (context: NextPageContext) {
 
   
-  const cookie = context.req?.headers.cookie as string
+  const cur_cookie = context.req?.headers.cookie as string
   
-  if (cookie) {
-    const res = await UserApi.isLoggedIn(cookie);
+  const token = context.query?.token;
+  
+  if (cur_cookie) {
+    const res = await UserApi.isLoggedIn(cur_cookie);
     if (res) {
       context.res
       ?.writeHead(302, {
@@ -119,9 +120,34 @@ export async function getServerSideProps (context: NextPageContext) {
       }
     }
   } else {
-    return {
-      props: {}
+    if (token) {
+      context.res.setHeader(
+        "Set-Cookie",
+        cookie.serialize("accessToken", token, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV !== "development",
+          maxAge: 60 * 60,
+          sameSite: "strict",
+          path: "/",
+        })
+      )
+      context.res
+      ?.writeHead(302, {
+        Location: process.env.HOME_PAGE
+      })
+      .end();
+      return {
+        props: {}
+      }
     }
-  }
+    else {
+      return {
+        props: {}
+      }
+    }
+  
+   
+  
+}
 }
 
