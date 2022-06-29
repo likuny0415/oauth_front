@@ -19,7 +19,6 @@ export default function Login() {
     setSignup(isSignup);
   };
 
-
   return (
     <>
       <Head>
@@ -28,7 +27,10 @@ export default function Login() {
           name="login"
           content="Please login to use fully-featured application."
         />
-        <meta name="google-site-verification" content="luzEBfmYJt0MYLlCQdcL6LDj3Fc1KE-NRJC2yvV3z-c" />
+        <meta
+          name="google-site-verification"
+          content="luzEBfmYJt0MYLlCQdcL6LDj3Fc1KE-NRJC2yvV3z-c"
+        />
       </Head>
 
       <div className="bg-gray-100 min-h-screen flex items-center">
@@ -49,12 +51,8 @@ export default function Login() {
                 <span className="text-sm">or</span>
               </div>
 
-              
               <div className="flex justify-center">
-                <a
-                  href={process.env.NEXT_PUBLIC_GITHUB_LOGIN}
-                  className="mx-8"
-                >
+                <a href={process.env.NEXT_PUBLIC_GITHUB_LOGIN} className="mx-8">
                   <Image
                     src="/github_mark.png"
                     alt="github_login"
@@ -62,13 +60,9 @@ export default function Login() {
                     width={32}
                     layout="intrinsic"
                     className="opacity-40 hover:opacity-100"
-                   
                   />
                 </a>
-                <a
-                  href={process.env.NEXT_PUBLIC_GOOGLE_LOGIN}
-                  className="mx-8"
-                >
+                <a href={process.env.NEXT_PUBLIC_GOOGLE_LOGIN} className="mx-8">
                   <Image
                     src="/google_mark.svg"
                     alt="google_login"
@@ -80,14 +74,11 @@ export default function Login() {
                 </a>
               </div>
               <div className="flex justify-center mt-2 text-sm">
-                <span className="opacity-40">
-                  Sign in as a
-                  </span>
-                  <Link href="/tourist">
-                    <a className="opacity-100 ml-2 text-indigo-600">Demo User</a>
-                  </Link>
+                <span className="opacity-40">Sign in as a</span>
+                <Link href="/tourist">
+                  <a className="opacity-100 ml-2 text-indigo-600">Demo User</a>
+                </Link>
               </div>
-
             </div>
           </div>
         </div>
@@ -96,24 +87,20 @@ export default function Login() {
   );
 }
 
-export async function getServerSideProps (context: NextPageContext) {
+export async function getServerSideProps(context: NextPageContext) {
+  const cur_cookie = context.req?.headers.cookie as string;
 
-  
-  const cur_cookie = context.req?.headers.cookie as string
-  
   const token = context.query?.token;
-  
+
   if (cur_cookie) {
     const res = await UserApi.isLoggedIn(cur_cookie);
     if (res) {
       context.res
-      ?.writeHead(302, {
-        Location: process.env.HOME_PAGE
-      })
-      .end();
-      return {
-        props: {}
-      }
+        ?.writeHead(302, {
+          Location: process.env.HOME_PAGE,
+        })
+        .end();
+     
     }
   } else {
     if (token) {
@@ -126,24 +113,15 @@ export async function getServerSideProps (context: NextPageContext) {
           sameSite: "strict",
           path: "/",
         })
-      )
+      );
       context.res
-      ?.writeHead(302, {
-        Location: process.env.HOME_PAGE
-      })
-      .end();
-      return {
-        props: {}
-      }
+        ?.writeHead(302, {
+          Location: process.env.HOME_PAGE,
+        })
+        .end();
     }
-    else {
-      return {
-        props: {}
-      }
-    }
-  
-   
-  
+  }
+  return {
+    props: {},
+  };
 }
-}
-

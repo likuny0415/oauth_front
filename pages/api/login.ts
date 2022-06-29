@@ -5,6 +5,7 @@ export default async function handler(req, res) {
   try {
     const result = await UserApi.login(req.body);
     if (result) {
+
       const token = result.jwt;
       res.setHeader(
         "Set-Cookie",

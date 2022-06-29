@@ -9,7 +9,6 @@ const UserApi = {
         username: email,
          password: password
       });   
-
       return response.data;
     } catch (error) {
       return "";
