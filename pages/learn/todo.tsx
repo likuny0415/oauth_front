@@ -33,7 +33,7 @@ const initialTodos: Todo[] = [
   },
 ];
 
-export default function MyToDo({ findTodos }) {
+export default function MyToDo({ findTodos, cookie }) {
   const [todos, setTodos] = useState(findTodos);
 
   function sortTodos(a: Todo, b: Todo): number {
@@ -73,16 +73,16 @@ export default function MyToDo({ findTodos }) {
     const newTodos = [newTodo, ...todos];
     newTodos.sort(sortTodos);
     setTodos(newTodos);
-    await TodoApi.createTodo(newTodo);
+    await TodoApi.createTodo(newTodo, cookie);
   };
 
   const finishTodo: FinishTodo = async (id: string) => {
-    await TodoApi.finishTodo(id);
+    await TodoApi.finishTodo(id, cookie);
     setTodos(todos.filter((item) => item.id !== id));
   };
 
   const deleteTodo: DeleteTodo = async (id: string) => {
-    await TodoApi.deleteTodo(id);
+    await TodoApi.deleteTodo(id, cookie);
     setTodos(todos.filter((item) => item.id !== id));
   };
 
@@ -103,7 +103,7 @@ export default function MyToDo({ findTodos }) {
       }
       return todo;
     });
-    await TodoApi.editTodo(id, text, new Date(newDdl), newPriority);
+    await TodoApi.editTodo(id, text, new Date(newDdl), newPriority, cookie);
     newTodos.sort(sortTodos);
     setTodos(newTodos);
   };

@@ -30,7 +30,8 @@ const initialTodos: Todo[] = [
 
 export default function Tourist() {
   return (
-    <MyToDo findTodos={initialTodos}  />
+    // <MyToDo findTodos={initialTodos}  />
+    <></>
   )
 }
 

@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import TodoApi from "../lib/api/todos";
 import MyToDo from "./learn/todo";
 
-export default function Home({ todos }) {
+export default function Home({ todos, cookie }) {
 
   return (
     <>
@@ -13,7 +13,7 @@ export default function Home({ todos }) {
       <title>Todo</title>
     </Head>
     <Navbar />
-      <MyToDo findTodos={todos} />
+      <MyToDo findTodos={todos} cookie={cookie} />
     </>
   );
 }
@@ -30,7 +30,7 @@ export async function getServerSideProps(context: NextPageContext) {
       return { props: {} }
   } else {
     const todos = await TodoApi.findAll(cookie);
-    return { props: { todos}}
+    return { props: { todos, cookie}}
     
   }
 }

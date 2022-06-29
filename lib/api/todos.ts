@@ -6,7 +6,7 @@ const TodoApi = {
       const response = await axios({
         method: "get",
         url: `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/todo/findall`,
-        withCredentials: true,
+        
         headers: {
           cookie: cookie,
         },
@@ -28,13 +28,16 @@ const TodoApi = {
       return error;
     }
   },
-  createTodo: async (newTodo: Todo) => {
+  createTodo: async (newTodo: Todo, cookie) => {
     try {
       const { id, text, ddl, complete, priority } = newTodo;
       const response = await axios({
         method: "post",
-        withCredentials: true,
+  withCredentials: true,
         url: `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/todo/create`,
+        headers: {
+          cookie: cookie,
+        },
         data: {
           id,
           text,
@@ -48,12 +51,15 @@ const TodoApi = {
       return error;
     }
   },
-  finishTodo: async (todoId: string) => {
+  finishTodo: async (todoId: string, cookie) => {
     try {
       const response = await axios({
         method: "post",
         withCredentials: true,
         url: `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/todo/finish`,
+        headers: {
+          cookie: cookie,
+        },
         data: {
           id: todoId,
         },
@@ -63,12 +69,15 @@ const TodoApi = {
       return error;
     }
   },
-  deleteTodo: async (todoId: string) => {
+  deleteTodo: async (todoId: string, cookie) => {
     try {
       const response = await axios({
         method: "post",
         withCredentials: true,
         url: `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/todo/delete`,
+        headers: {
+          cookie: cookie,
+        },
         data: {
           id: todoId,
         },
@@ -82,13 +91,17 @@ const TodoApi = {
     id: string,
     text: string,
     newDdl: Date,
-    newPriority: number
+    newPriority: number,
+    cookie
   ) => {
     try {
       const response = await axios({
         method: "post",
         withCredentials: true,
         url: `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/todo/update`,
+        headers: {
+          cookie: cookie,
+        },
         data: {
           id: id,
           text: text,
