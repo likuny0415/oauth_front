@@ -15,6 +15,7 @@ export default function Custom404() {
 
           <span className="relative block px-8 py-3 bg-[#1A2238] border border-current">
             <Link href="/">Go Home</Link>
+            
           </span>
         </a>
       </button>
