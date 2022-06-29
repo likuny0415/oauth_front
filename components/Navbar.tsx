@@ -12,8 +12,9 @@ function NavItem({ href, text }) {
     isActive = router.asPath.split("/").includes("pics")
   }
   return (
-    <Link href={href}>
+  
       <a
+      href={href}
         className={cn(
           isActive
             ? "font-semibold text-gray-800"
@@ -23,7 +24,7 @@ function NavItem({ href, text }) {
       >
         <span className="capsize">{text}</span>
       </a>
-    </Link>
+
   );
 }
 
@@ -43,7 +44,7 @@ function Accounts() {
       >
          
         <li className="flex">
-        <Link href={process.env.NEXT_PUBLIC_LOGOUT_URL!} > 
+        
           <a onClick={handleClick}>  <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6 text-gray-600"
@@ -51,6 +52,7 @@ function Accounts() {
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={2}
+            href={process.env.NEXT_PUBLIC_LOGOUT_URL!}
           >
             <path
               strokeLinecap="round"
@@ -58,7 +60,7 @@ function Accounts() {
               d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
             />
           </svg>Logout</a>
-          </Link>
+          
         </li>
         
       </ul>
