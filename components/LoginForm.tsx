@@ -3,10 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Router, { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
-import UserApi  from "../lib/api/user";
 import DisplayErrorText from "./DisplayErrorText";
-import ErrorText from "./ErrorText";
-import cookie from 'js-cookie'
 
 export default function LoginForm({ toggleSignup }) {
   const loginSchema = Yup.object().shape({

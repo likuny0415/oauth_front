@@ -108,9 +108,9 @@ export async function getServerSideProps(context: NextPageContext) {
         "Set-Cookie",
         cookie.serialize("accessToken", token, {
           httpOnly: true,
-          secure: process.env.NODE_ENV !== "development",
+          secure: true,
           maxAge: 60 * 60,
-          sameSite: "strict",
+          sameSite: "none",
           path: "/",
         })
       );
