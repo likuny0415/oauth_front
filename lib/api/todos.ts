@@ -34,7 +34,6 @@ const TodoApi = {
       const response = await axios({
         method: "post",
         withCredentials: true,
-        headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'},
         url: `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/todo/create`,
         data: {
           id,
@@ -54,7 +53,6 @@ const TodoApi = {
       const response = await axios({
         method: "post",
         withCredentials: true,
-        headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'},
         url: `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/todo/finish`,
         data: {
           id: todoId,
@@ -70,7 +68,6 @@ const TodoApi = {
       const response = await axios({
         method: "post",
         withCredentials: true,
-        headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'},
         url: `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/todo/delete`,
         data: {
           id: todoId,
@@ -91,7 +88,6 @@ const TodoApi = {
       const response = await axios({
         method: "post",
         withCredentials: true,
-        headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'},
         url: `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/todo/update`,
         data: {
           id: id,
