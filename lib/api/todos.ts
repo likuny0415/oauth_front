@@ -6,9 +6,8 @@ const TodoApi = {
       const response = await axios({
         method: "get",
         url: `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/todo/findall`,
-        
         headers: {
-          cookie: cookie,
+          Authorization:`Bearer ${cookie}`
         },
       });
       return response.data?.r;
@@ -28,15 +27,14 @@ const TodoApi = {
       return error;
     }
   },
-  createTodo: async (newTodo: Todo, cookie) => {
+  createTodo: async (newTodo: Todo, cookie:string) => {
     try {
       const { id, text, ddl, complete, priority } = newTodo;
       const response = await axios({
         method: "post",
-  withCredentials: true,
         url: `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/todo/create`,
         headers: {
-          cookie: cookie,
+          Authorization:`Bearer ${cookie}`
         },
         data: {
           id,
@@ -51,14 +49,13 @@ const TodoApi = {
       return error;
     }
   },
-  finishTodo: async (todoId: string, cookie) => {
+  finishTodo: async (todoId: string, cookie:string) => {
     try {
       const response = await axios({
         method: "post",
-        withCredentials: true,
         url: `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/todo/finish`,
         headers: {
-          cookie: cookie,
+          Authorization:`Bearer ${cookie}`
         },
         data: {
           id: todoId,
@@ -69,14 +66,13 @@ const TodoApi = {
       return error;
     }
   },
-  deleteTodo: async (todoId: string, cookie) => {
+  deleteTodo: async (todoId: string, cookie:string) => {
     try {
       const response = await axios({
         method: "post",
-        withCredentials: true,
         url: `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/todo/delete`,
         headers: {
-          cookie: cookie,
+          Authorization:`Bearer ${cookie}`
         },
         data: {
           id: todoId,
@@ -92,15 +88,14 @@ const TodoApi = {
     text: string,
     newDdl: Date,
     newPriority: number,
-    cookie
+    cookie:string
   ) => {
     try {
       const response = await axios({
         method: "post",
-        withCredentials: true,
         url: `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/todo/update`,
         headers: {
-          cookie: cookie,
+          Authorization:`Bearer ${cookie}`
         },
         data: {
           id: id,

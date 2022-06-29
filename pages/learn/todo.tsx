@@ -34,6 +34,7 @@ const initialTodos: Todo[] = [
 ];
 
 export default function MyToDo({ findTodos, cookie }) {
+
   const [todos, setTodos] = useState(findTodos);
 
   function sortTodos(a: Todo, b: Todo): number {

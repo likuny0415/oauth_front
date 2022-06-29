@@ -6,6 +6,7 @@ import MyToDo from "./learn/todo";
 
 export default function Home({ todos, cookie }) {
 
+
   return (
     <>
 
@@ -19,9 +20,11 @@ export default function Home({ todos, cookie }) {
 }
 
 export async function getServerSideProps(context: NextPageContext) {
-  const cookie = context.req?.headers.cookie as string;
+  const cur_cookie = context.req?.headers.cookie as string;
   
-  if (!cookie) {
+  
+  
+  if (!cur_cookie) {
     context.res
       ?.writeHead(302, {
         Location: process.env.LOGIN_PAGE,
@@ -29,6 +32,7 @@ export async function getServerSideProps(context: NextPageContext) {
       .end();
       return { props: {} }
   } else {
+    const cookie = cur_cookie.split("=")[1];
     const todos = await TodoApi.findAll(cookie);
     return { props: { todos, cookie}}
     
