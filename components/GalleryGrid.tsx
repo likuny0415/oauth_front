@@ -7,6 +7,8 @@ export default function GalleryGrid(props) {
     const { data, loading } = props;
     const size = useWindowSize();
 
+    console.log(data)
+
 
     function changeView(width: number) {
         if (width > 1024) {
