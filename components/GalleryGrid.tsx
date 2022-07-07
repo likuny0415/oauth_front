@@ -37,7 +37,7 @@ export default function GalleryGrid(props) {
           <Masonry columnsCount={3} gutter="20px" >
             {data.map((item, itemIndex) => (
                 <div key={itemIndex}>
-                    <Photo data={item} />
+                    {/* <Photo data={item} /> */}
                 </div>
             )) }
           </Masonry>       

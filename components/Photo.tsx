@@ -9,7 +9,6 @@ export default function Photo(props) {
   const { data } = props;
 
   const { width, height, alt_description, urls, user } = data;
-  console.log(data)
   const { name, profile_image, links } = user;
   const [like, setLike] = useState(false);
   async function handleClick(e) {

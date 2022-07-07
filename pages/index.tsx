@@ -22,9 +22,6 @@ export default function Home({ todos, cookie }) {
 export async function getServerSideProps(context: NextPageContext) {
   const cur_cookie = context.req?.headers.cookie as string;
   
-  console.log("____" + !cur_cookie)
-  
-  
   if (!cur_cookie) {
    return {
     redirect: {

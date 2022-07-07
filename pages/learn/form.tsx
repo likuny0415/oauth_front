@@ -20,7 +20,6 @@ export default function Form() {
   const [passwordType, setPasswordType] = useState("password");
 
   function onSubmit(data) {
-    console.log(JSON.stringify(data, null, 4));
     return false;
   }
 
