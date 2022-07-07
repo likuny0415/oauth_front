@@ -8,7 +8,7 @@ export default function GalleryGrid(props) {
     const size = useWindowSize();
 
 
-    function changeView(width) {
+    function changeView(width: number) {
         if (width > 1024) {
             return 3;
         } else if (width > 768) {
@@ -34,7 +34,7 @@ export default function GalleryGrid(props) {
 
     return (
         <div className="container mt-12 flex flex-row flex-wrap items-stretch md:flex-nowrap ">
-          <Masonry columnsCount={changeView(size.width)} gutter="20px" >
+          <Masonry columnsCount={3} gutter="20px" >
             {data.map((item, itemIndex) => (
                 <div key={itemIndex}>
                     <Photo data={item} />

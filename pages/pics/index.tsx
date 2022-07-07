@@ -28,7 +28,7 @@ export default function Pics() {
       <PicsNav />
       <Search value={query} onChange={(value) => setQuery(value)}/>
       
-      <GalleryGrid data={data} loading={isLoading} />
+      {/* <GalleryGrid data={data} loading={isLoading} /> */}
       <LoadMore
         containerRef={containerRef}
         error={isError}

@@ -13,4 +13,5 @@ export default async function logout(req, res) {
       )
   res.statusCode = 200;
   res.json({loggout: true})
+  res.end();
 }
