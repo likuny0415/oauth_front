@@ -6,10 +6,7 @@ import useWindowSize from "../lib/hooks/use-windowsize";
 export default function GalleryGrid(props) {
     const { data, loading } = props;
     const size = useWindowSize();
-
-    console.log(data)
-
-
+    
     function changeView(width: number) {
         if (width > 1024) {
             return 3;
@@ -39,7 +36,7 @@ export default function GalleryGrid(props) {
           <Masonry columnsCount={3} gutter="20px" >
             {data.map((item, itemIndex) => (
                 <div key={itemIndex}>
-                    {/* <Photo data={item} /> */}
+                    <Photo data={item} />
                 </div>
             )) }
           </Masonry>       
