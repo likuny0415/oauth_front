@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import cn from "classnames";
 import MobileMenu from "./MobileMenu";
 
@@ -31,7 +31,14 @@ function NavItem({ href, text }) {
 function Accounts() {
 
     function handleClick(e) {
-        
+        fetch("api/logout", {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({}), 
+        })
+        Router.push("/login")
     }
   return (
     <div className="dropdown dropdown-end">
@@ -52,7 +59,7 @@ function Accounts() {
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={2}
-            href={process.env.NEXT_PUBLIC_LOGOUT_URL!}
+            // href={process.env.NEXT_PUBLIC_LOGOUT_URL!}
           >
             <path
               strokeLinecap="round"

@@ -22,15 +22,17 @@ export default function Home({ todos, cookie }) {
 export async function getServerSideProps(context: NextPageContext) {
   const cur_cookie = context.req?.headers.cookie as string;
   
+  console.log("____" + !cur_cookie)
   
   
   if (!cur_cookie) {
-    context.res
-      ?.writeHead(302, {
-        Location: process.env.LOGIN_PAGE,
-      })
-      .end();
-      return { props: {} }
+   return {
+    redirect: {
+      permanent: false,
+      destination: "/login",
+    },
+    props:{},
+   }
   } else {
     const cookie = cur_cookie.split("=")[1];
     const todos = await TodoApi.findAll(cookie);
