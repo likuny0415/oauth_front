@@ -2,11 +2,12 @@ import Loading from "./Loading";
 import Photo from "./Photo";
 import Masonry from "react-responsive-masonry";
 import useWindowSize from "../lib/hooks/use-windowsize";
+import { ToastProvider } from 'react-toast-notifications';
 
 export default function GalleryGrid(props) {
     const { data, loading } = props;
     const size = useWindowSize();
-    
+
     function changeView(width: number) {
         if (width > 1024) {
             return 3;
@@ -32,14 +33,17 @@ export default function GalleryGrid(props) {
     }
 
     return (
+      
         <div className="container mt-12 flex flex-row flex-wrap items-stretch md:flex-nowrap ">
-          <Masonry columnsCount={3} gutter="20px" >
+              <ToastProvider>
+          <Masonry columnsCount={changeView(size.width)} gutter="20px" >
             {data.map((item, itemIndex) => (
                 <div key={itemIndex}>
                     <Photo data={item} />
                 </div>
             )) }
-          </Masonry>       
+          </Masonry>  
+          </ToastProvider>     
       </div>
     )
 }

@@ -1,19 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { createToast } from "vercel-toast";
+import { ToastProvider, useToasts } from 'react-toast-notifications';
+
 
 import PhotoApi from "../lib/api/photos";
 
 export default function Photo(props) {
   const { data } = props;
-
+  
   const { width, height, alt_description, urls, user } = data;
   const { name, profile_image, links } = user;
   const [like, setLike] = useState(false);
+  const { addToast } = useToasts();
   async function handleClick(e) {
-    e.preventDefault();
-    const res = await PhotoApi.like(data)
+    console.log("like")
+    addToast('Saved Successfully', { appearance: 'success' });
+    // const res = await PhotoApi.like(data)
   }
   
   
@@ -52,6 +55,8 @@ export default function Photo(props) {
           />
         </svg>
       </button>
+
+
       </div>
 
       <div
@@ -83,6 +88,7 @@ export default function Photo(props) {
       </div>
      </div>
     </div>
+    
   );
 }
 

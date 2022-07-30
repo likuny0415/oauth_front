@@ -36,7 +36,7 @@ export default function Login() {
       <div className="bg-gray-100 min-h-screen flex items-center">
         <div className="mx-auto bg-white w-px-400 rounded-md shadow-xl py-8 ">
           <span className="flex justify-center font-inknut text-3xl mb-4">
-            {signup ? <span>Create Account</span> : <span>Kuny Todo</span>}
+            {signup ? <span>Create Account</span> : <span>Kuny Utils</span>}
           </span>
 
           <div className="max-w-md mx-8">
@@ -73,12 +73,12 @@ export default function Login() {
                   />
                 </a>
               </div>
-              <div className="flex justify-center mt-2 text-sm">
+              {/* <div className="flex justify-center mt-2 text-sm">
                 <span className="opacity-40">Sign in as a</span>
                 <Link href="/tourist">
                   <a className="opacity-100 ml-2 text-indigo-600">Demo User</a>
                 </Link>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

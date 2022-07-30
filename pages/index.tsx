@@ -3,9 +3,9 @@ import Head from "next/head";
 import Navbar from "../components/Navbar";
 import TodoApi from "../lib/api/todos";
 import MyToDo from "./learn/todo";
+import { ToastContainer} from 'react-toastify';
 
 export default function Home({ todos, cookie }) {
-
 
   return (
     <>
@@ -13,8 +13,10 @@ export default function Home({ todos, cookie }) {
     <Head>
       <title>Todo</title>
     </Head>
+    
     <Navbar />
       <MyToDo findTodos={todos} cookie={cookie} />
+   
     </>
   );
 }
